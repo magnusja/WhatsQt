@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include <notification/notificationservice.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +19,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    NotificationService *notificationService;
 
 private slots:
     void webViewTitleChanged(const QString &title);

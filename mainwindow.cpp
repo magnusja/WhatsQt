@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    notificationService = NotificationService::getNotificationService();
+
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
 }
 
@@ -32,4 +34,6 @@ void MainWindow::webViewTitleChanged(const QString &title)
         setWindowTitle("WhatsQt");
     else
         setWindowTitle(QString("(%0) WhatsQt").arg(badge));
+
+    notificationService->setApplicationBadge(badge);
 }

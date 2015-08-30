@@ -27,9 +27,19 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 SOURCES += main.cpp\
     mainwindow.cpp \
-    view/webview.cpp
+    view/webview.cpp \
+    notification/notificationservice.cpp
 
 HEADERS  += mainwindow.h \
-    view/webview.h
+    view/webview.h \
+    notification/notificationservice.h
 
 FORMS    += mainwindow.ui
+
+mac {
+    OBJECTIVE_HEADERS += notification/osx/osxnotificationservice.h
+    OBJECTIVE_SOURCES += notification/osx/osxnotificationservice.mm
+
+    LIBS += -framework Foundation -framework AppKit
+}
+
