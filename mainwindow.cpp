@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    notificationService = NotificationService::getNotificationService();
+    notificationService = NotificationService::getNotificationService(this);
 
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
 }

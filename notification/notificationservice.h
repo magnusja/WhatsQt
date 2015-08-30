@@ -10,7 +10,7 @@ protected:
 public:
     virtual void setApplicationBadge(QString badge) = 0;
 
-    static NotificationService* getNotificationService();
+    static NotificationService* getNotificationService(QObject *parent = 0);
 };
 
 #endif // NOTIFICATIONSERVICE_H

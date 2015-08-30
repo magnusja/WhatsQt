@@ -28,11 +28,13 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 SOURCES += main.cpp\
     mainwindow.cpp \
     view/webview.cpp \
-    notification/notificationservice.cpp
+    notification/notificationservice.cpp \
+    notification/nullnotificationservice.cpp
 
 HEADERS  += mainwindow.h \
     view/webview.h \
-    notification/notificationservice.h
+    notification/notificationservice.h \
+    notification/nullnotificationservice.h
 
 FORMS    += mainwindow.ui
 

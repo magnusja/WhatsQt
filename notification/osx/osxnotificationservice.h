@@ -3,7 +3,7 @@
 
 #include <notification/notificationservice.h>
 
-class OSXNotificationService : NotificationService
+class OSXNotificationService : public NotificationService
 {
 friend class NotificationService;
 private:

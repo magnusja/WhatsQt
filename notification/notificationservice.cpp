@@ -1,4 +1,5 @@
 #include "notificationservice.h"
+#include "nullnotificationservice.h"
 
 #ifdef Q_OS_OSX
 #include "osx/osxnotificationservice.h"
@@ -10,12 +11,12 @@ NotificationService::NotificationService(QObject *parent)
 
 }
 
-NotificationService* NotificationService::getNotificationService()
+NotificationService* NotificationService::getNotificationService(QObject *parent)
 {
 #ifdef Q_OS_OSX
-    return new OSXNotificationService();
+    return new OSXNotificationService(parent);
 #else
-    return 0;
+    return new NullNotificationService(parent);
 #endif
 }
 
