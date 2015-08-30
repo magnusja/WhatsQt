@@ -26,12 +26,10 @@ UI_DIR = $$DESTDIR/ui
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    net/cookiejar.cpp \
+    mainwindow.cpp \
     view/webview.cpp
 
 HEADERS  += mainwindow.h \
-    net/cookiejar.h \
     view/webview.h
 
 FORMS    += mainwindow.ui
