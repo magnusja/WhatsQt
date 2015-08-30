@@ -1,5 +1,6 @@
 #import <Foundation/NSString.h>
 #import <AppKit/NSApplication.h>
+#import <AppKit/NSDockTile.h>
 
 #include "osxnotificationservice.h"
 
