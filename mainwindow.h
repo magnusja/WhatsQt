@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void webViewTitleChanged(const QString &title);
 };
 
 #endif // MAINWINDOW_H
