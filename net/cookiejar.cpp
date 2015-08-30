@@ -1,6 +1,9 @@
 #include "cookiejar.h"
 
-CookieJar::CookieJar()
+
+
+CookieJar::CookieJar(QObject *parent)
+    : QNetworkCookieJar(parent)
 {
 
 }
