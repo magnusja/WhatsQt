@@ -1,7 +1,6 @@
 #include <QWebEngineProfile>
-#include <QWebEnginePage>
-
 #include "webview.h"
+#include "webpage.h"
 
 WebView::WebView(QWidget *parent)
     : QWebEngineView(parent)
@@ -14,7 +13,7 @@ WebView::WebView(QWidget *parent)
     qDebug() << "WebEngine Cache path: " << profile->cachePath();
     qDebug() << "WebEngine Persistent Storage path: " << profile->persistentStoragePath();
 
-    QWebEnginePage *page = new QWebEnginePage(profile, this);
+    WebPage *page = new WebPage(profile, this);
     setPage(page);
 
     load(QUrl("https://web.whatsapp.com"));

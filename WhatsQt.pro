@@ -29,12 +29,14 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     view/webview.cpp \
     notification/notificationservice.cpp \
-    notification/nullnotificationservice.cpp
+    notification/nullnotificationservice.cpp \
+    view/webpage.cpp
 
 HEADERS  += mainwindow.h \
     view/webview.h \
     notification/notificationservice.h \
-    notification/nullnotificationservice.h
+    notification/nullnotificationservice.h \
+    view/webpage.h
 
 FORMS    += mainwindow.ui
 
