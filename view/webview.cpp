@@ -14,7 +14,14 @@ WebView::WebView(QWidget *parent)
     qDebug() << "WebEngine Cache path: " << profile->cachePath();
     qDebug() << "WebEngine Persistent Storage path: " << profile->persistentStoragePath();
 
-    setPage(new QWebEnginePage(profile, this));
+    QWebEnginePage *page = new QWebEnginePage(profile, this);
+    setPage(page);
+
     load(QUrl("https://web.whatsapp.com"));
+}
+
+void WebView::contextMenuEvent(QContextMenuEvent */*event*/)
+{
+    // We do not want a context menu
 }
 
