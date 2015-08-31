@@ -47,3 +47,6 @@ mac {
     LIBS += -framework Foundation -framework AppKit
 }
 
+RESOURCES += \
+    resources.qrc
+

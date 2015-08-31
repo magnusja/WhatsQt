@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>js/bridge.js</file>
+    </qresource>
+</RCC>

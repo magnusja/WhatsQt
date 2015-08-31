@@ -1,4 +1,9 @@
+
+#include <QWebEngineScriptCollection>
+#include <QWebEngineScript>
 #include <QWebEngineProfile>
+#include <QFile>
+
 #include "webview.h"
 #include "webpage.h"
 
@@ -12,6 +17,13 @@ WebView::WebView(QWidget *parent)
 
     qDebug() << "WebEngine Cache path: " << profile->cachePath();
     qDebug() << "WebEngine Persistent Storage path: " << profile->persistentStoragePath();
+
+    QWebEngineScript script;
+    QFile file(":/js/bridge.js");
+    file.open(QIODevice::ReadOnly);
+    script.setSourceCode(file.readAll());
+    script.setInjectionPoint(QWebEngineScript::DocumentReady);
+    profile->scripts()->insert(script);
 
     WebPage *page = new WebPage(profile, this);
     setPage(page);
