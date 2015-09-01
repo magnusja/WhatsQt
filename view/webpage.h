@@ -10,6 +10,7 @@ class WebPage : public QWebEnginePage
 
 public:
     explicit WebPage(QWebEngineProfile *profile, QWidget *parent = 0);
+    ~WebPage();
 
     bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
 
@@ -20,9 +21,6 @@ private:
     // Hack to open links in desktop browser see also createWindow implementation
     class OpenUrlWebPage : public QWebEnginePage {
     public:
-        // Inherit constructor, new in c++11
-        using QWebEnginePage::QWebEnginePage;
-
         bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
     };
 

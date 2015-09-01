@@ -11,9 +11,14 @@ bool WebPage::OpenUrlWebPage::acceptNavigationRequest(const QUrl &url, Navigatio
 
 WebPage::WebPage(QWebEngineProfile *profile, QWidget *parent)
     : QWebEnginePage(profile, parent),
-      openUrlWebPage(new WebPage::OpenUrlWebPage(this))
+      openUrlWebPage(new WebPage::OpenUrlWebPage())
 {
 
+}
+
+WebPage::~WebPage()
+{
+    openUrlWebPage->deleteLater();
 }
 
 bool WebPage::acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame)
