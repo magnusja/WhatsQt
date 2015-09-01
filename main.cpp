@@ -4,6 +4,10 @@
 
 int main(int argc, char *argv[])
 {
+#ifdef QT_DEBUG
+    qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "23654");
+#endif
+
     QApplication::setApplicationName("WhatsQt");
     QApplication::setOrganizationName("mjdv");
     QApplication::setOrganizationDomain("https://github.com/mjdev");

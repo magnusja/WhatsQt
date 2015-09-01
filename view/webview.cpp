@@ -1,5 +1,4 @@
 
-#include <QWebEngineScriptCollection>
 #include <QWebEngineScript>
 #include <QWebEngineProfile>
 #include <QFile>
@@ -18,12 +17,7 @@ WebView::WebView(QWidget *parent)
     qDebug() << "WebEngine Cache path: " << profile->cachePath();
     qDebug() << "WebEngine Persistent Storage path: " << profile->persistentStoragePath();
 
-    QWebEngineScript script;
-    QFile file(":/js/bridge.js");
-    file.open(QIODevice::ReadOnly);
-    script.setSourceCode(file.readAll());
-    script.setInjectionPoint(QWebEngineScript::DocumentReady);
-    profile->scripts()->insert(script);
+    insertJavaScript(profile->scripts());
 
     auto page = new WebPage(profile, this);
     setPage(page);
@@ -34,3 +28,19 @@ void WebView::contextMenuEvent(QContextMenuEvent */*event*/)
     // We do not want a context menu
 }
 
+void WebView::insertJavaScript(QWebEngineScriptCollection *scripts)
+{
+    QFile webChannelFile(":/qtwebchannel/qwebchannel.js");
+    webChannelFile.open(QIODevice::ReadOnly);
+    QWebEngineScript webChannelScript;
+    webChannelScript.setSourceCode(webChannelFile.readAll());
+    webChannelScript.setInjectionPoint(QWebEngineScript::DocumentCreation);
+    scripts->insert(webChannelScript);
+
+    QWebEngineScript script;
+    QFile file(":/js/bridge.js");
+    file.open(QIODevice::ReadOnly);
+    script.setSourceCode(file.readAll());
+    script.setInjectionPoint(QWebEngineScript::DocumentReady);
+    scripts->insert(script);
+}
