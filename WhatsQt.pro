@@ -8,6 +8,8 @@ QT       += core gui webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++11
+
 TARGET = WhatsQt
 TEMPLATE = app
 VERSION = 0.01

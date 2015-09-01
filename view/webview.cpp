@@ -25,7 +25,7 @@ WebView::WebView(QWidget *parent)
     script.setInjectionPoint(QWebEngineScript::DocumentReady);
     profile->scripts()->insert(script);
 
-    WebPage *page = new WebPage(profile, this);
+    auto page = new WebPage(profile, this);
     setPage(page);
 
     load(QUrl("https://web.whatsapp.com"));

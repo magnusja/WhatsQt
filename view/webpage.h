@@ -20,7 +20,9 @@ private:
     // Hack to open links in desktop browser see also createWindow implementation
     class OpenUrlWebPage : public QWebEnginePage {
     public:
-        OpenUrlWebPage(QObject *parent = 0) : QWebEnginePage(parent) { }
+        // Inherit constructor, new in c++11
+        using QWebEnginePage::QWebEnginePage;
+
         bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
     };
 
