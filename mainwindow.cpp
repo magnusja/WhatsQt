@@ -1,4 +1,5 @@
 #include <QRegExp>
+#include <QWebChannel>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -10,8 +11,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     notificationService = NotificationService::getNotificationService(this);
+    auto channel = new QWebChannel(this);
+    channel->registerObject("notificationService", notificationService);
+    ui->webView->page()->setWebChannel(channel);
 
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
+
+    ui->webView->load(QUrl("https://web.whatsapp.com"));
 }
 
 MainWindow::~MainWindow()

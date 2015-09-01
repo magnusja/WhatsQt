@@ -27,8 +27,6 @@ WebView::WebView(QWidget *parent)
 
     auto page = new WebPage(profile, this);
     setPage(page);
-
-    load(QUrl("https://web.whatsapp.com"));
 }
 
 void WebView::contextMenuEvent(QContextMenuEvent */*event*/)

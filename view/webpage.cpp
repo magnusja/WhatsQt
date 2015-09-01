@@ -32,12 +32,21 @@ bool WebPage::acceptNavigationRequest(const QUrl &url, NavigationType type, bool
     return QWebEnginePage::acceptNavigationRequest(url, type, isMainFrame);
 }
 
-QWebEnginePage* WebPage::createWindow(WebWindowType type) {
+QWebEnginePage* WebPage::createWindow(WebWindowType type)
+{
     // This is a hack, not everytime acceptNavigationRequest is called when user clicks on a link
     // but this method is called to create a new window
     // We just create a dummy page to open the URL in the desktop browser
     // see also here: https://github.com/tianyu/see/issues/3
     qDebug() << "New window requested for type: " << type;
     return openUrlWebPage;
+}
+
+void WebPage::javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, const QString &message, int lineNumber, const QString &sourceID)
+{
+    qDebug() << "JS Console: line: " << lineNumber;
+    qDebug() << "JS Console: src id: " << sourceID;
+    qDebug() << "JS Console: level: " << level;
+    qDebug() << "JS Console: " << message;
 }
 
