@@ -17,9 +17,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     Ui::MainWindow *ui;
     NotificationService *notificationService;
+
+    void saveSettings();
+    void readSettings();
 
 private slots:
     void webViewTitleChanged(const QString &title);
