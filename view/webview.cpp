@@ -39,6 +39,7 @@ void WebView::insertJavaScript(QWebEngineScriptCollection *scripts)
     QWebEngineScript webChannelScript;
     webChannelScript.setSourceCode(webChannelFile.readAll());
     webChannelScript.setInjectionPoint(QWebEngineScript::DocumentCreation);
+    webChannelScript.setWorldId(QWebEngineScript::MainWorld);
     scripts->insert(webChannelScript);
 
     QWebEngineScript script;
@@ -46,5 +47,6 @@ void WebView::insertJavaScript(QWebEngineScriptCollection *scripts)
     file.open(QIODevice::ReadOnly);
     script.setSourceCode(file.readAll());
     script.setInjectionPoint(QWebEngineScript::DocumentReady);
+    script.setWorldId(QWebEngineScript::MainWorld);
     scripts->insert(script);
 }

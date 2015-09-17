@@ -16,3 +16,14 @@ void OSXNotificationService::setApplicationBadge(QString badge)
     [[NSApp dockTile] setBadgeLabel:nsBadge];
 }
 
+void OSXNotificationService::deliverNotification(const Notification &notification)
+{
+    NSString* title = [[NSString alloc] initWithUTF8String:notification.getTitle().toUtf8().data()];
+    NSString* informativeText = [[NSString alloc] initWithUTF8String:notification.getInformativeText().toUtf8().data()];
+
+    NSUserNotification *osxNotification = [NSUserNotification new];
+    osxNotification.title = title;
+    osxNotification.subtitle = informativeText;
+    [[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:osxNotification];
+}
+

@@ -9,6 +9,7 @@ public:
     NullNotificationService(QObject *parent = 0);
 
     void setApplicationBadge(QString badge);
+    void deliverNotification(const Notification &notification);
 };
 
 #endif // NULLNOTIFICATIONSERVICE_H

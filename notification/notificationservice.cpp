@@ -5,6 +5,26 @@
 #include "osx/osxnotificationservice.h"
 #endif
 
+QString Notification::getTitle() const
+{
+    return title;
+}
+
+void Notification::setTitle(const QString &value)
+{
+    title = value;
+}
+
+QString Notification::getInformativeText() const
+{
+    return infomativeText;
+}
+
+void Notification::setInformativeText(const QString &value)
+{
+    infomativeText = value;
+}
+
 NotificationService::NotificationService(QObject *parent)
     : QObject(parent)
 {
@@ -19,4 +39,3 @@ NotificationService* NotificationService::getNotificationService(QObject *parent
     return new NullNotificationService(parent);
 #endif
 }
-

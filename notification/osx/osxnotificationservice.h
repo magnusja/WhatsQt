@@ -11,6 +11,7 @@ private:
 
 public:
     void setApplicationBadge(QString badge);
+    void deliverNotification(const Notification &notification);
 };
 
 #endif // OSXNOTIFICATIONSERVICE_H
