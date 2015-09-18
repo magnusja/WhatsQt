@@ -27,3 +27,8 @@ void OSXNotificationService::deliverNotification(const Notification &notificatio
     [[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:osxNotification];
 }
 
+void OSXNotificationService::dismissNotifications()
+{
+    [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+}
+

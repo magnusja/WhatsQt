@@ -1,9 +1,28 @@
 #include <QRegExp>
 #include <QWebChannel>
 #include <QSettings>
+#include <QMap>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+JSNotifcationWrapper::JSNotifcationWrapper(NotificationService *service, QObject *parent)
+    : QObject(parent),
+      notificationService(service)
+{
+
+}
+
+void JSNotifcationWrapper::deliverNotification(const QString &title, const QMap<QString, QVariant> &options)
+{
+    qDebug() << "Received notification: " << title << " " << options;
+
+    Notification notification;
+    notification.setTitle(title);
+    notification.setInformativeText(options["body"].toString());
+
+    notificationService->deliverNotification(notification);
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,8 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     notificationService = NotificationService::getNotificationService(this);
+    JSNotifcationWrapper *wrapper = new JSNotifcationWrapper(notificationService, this);
     auto channel = new QWebChannel(this);
-    channel->registerObject("notificationService", notificationService);
+    channel->registerObject("notificationService", wrapper);
     ui->webView->page()->setWebChannel(channel);
 
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
@@ -98,4 +118,15 @@ void MainWindow::initActions()
     action->setShortcut(QKeySequence("F5"));
 #endif
     ui->webView->addAction(action);
+}
+
+bool MainWindow::event(QEvent *event)
+{
+    if(event->type() == QEvent::WindowActivate)
+    {
+        qDebug() << "Window becoming active";
+        notificationService->dismissNotifications();
+    }
+
+    return QMainWindow::event(event);
 }

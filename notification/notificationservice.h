@@ -3,12 +3,9 @@
 
 #include <QObject>
 
-class Notification : public QObject {
-    Q_OBJECT
+class Notification {
+
 public:
-
-    using QObject::QObject;
-
     QString getTitle() const;
     void setTitle(const QString &value);
 
@@ -18,7 +15,6 @@ public:
 private:
     QString title;
     QString infomativeText;
-
 };
 
 class NotificationService : public QObject
@@ -28,6 +24,7 @@ protected:
 public:
     virtual void setApplicationBadge(QString badge) = 0;
     virtual void deliverNotification(const Notification &notification) = 0;
+    virtual void dismissNotifications() = 0;
 
     static NotificationService* getNotificationService(QObject *parent = 0);
 };
