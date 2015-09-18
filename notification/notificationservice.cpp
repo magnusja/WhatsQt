@@ -25,6 +25,16 @@ void Notification::setInformativeText(const QString &value)
     infomativeText = value;
 }
 
+QString Notification::getIdentifier() const
+{
+    return identifier;
+}
+
+void Notification::setIdentifier(const QString &value)
+{
+    identifier = value;
+}
+
 NotificationService::NotificationService(QObject *parent)
     : QObject(parent)
 {

@@ -5,6 +5,8 @@
 
 class NullNotificationService : public NotificationService
 {
+    Q_OBJECT
+
 public:
     NullNotificationService(QObject *parent = 0);
 

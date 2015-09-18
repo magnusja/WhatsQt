@@ -46,6 +46,8 @@ private:
 
 private slots:
     void webViewTitleChanged(const QString &title);
+    void notificationClicked(const Notification &notification);
+    void notificationReplied(const Notification &notification, const QString &reply);
 };
 
 #endif // MAINWINDOW_H

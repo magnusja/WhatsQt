@@ -3,32 +3,61 @@
 #import <AppKit/NSDockTile.h>
 
 #include "osxnotificationservice.h"
+#import <notification/osx/notificationcenterdelegate.h>
+
+Notification osxNotificationToQtNotification(NSUserNotification *osxNotification) {
+    Notification qtNotification;
+    qtNotification.setTitle(QString::fromNSString(osxNotification.title));
+    qtNotification.setIdentifier(QString::fromNSString(osxNotification.identifier));
+    qtNotification.setInformativeText(QString::fromNSString(osxNotification.informativeText));
+
+    return qtNotification;
+}
 
 OSXNotificationService::OSXNotificationService(QObject *parent)
     : NotificationService(parent)
 {
+    notificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
+    notificationCenter.delegate = [[NotificationCenterDelegate alloc] initWithNotificationService: this];
+}
 
+OSXNotificationService::~OSXNotificationService()
+{
+    [notificationCenter.delegate release];
+    [notificationCenter release];
 }
 
 void OSXNotificationService::setApplicationBadge(QString badge)
 {
-    NSString* nsBadge = [[NSString alloc] initWithUTF8String:badge.toUtf8().data()];
-    [[NSApp dockTile] setBadgeLabel:nsBadge];
+    [[NSApp dockTile] setBadgeLabel:badge.toNSString()];
 }
 
 void OSXNotificationService::deliverNotification(const Notification &notification)
 {
-    NSString* title = [[NSString alloc] initWithUTF8String:notification.getTitle().toUtf8().data()];
-    NSString* informativeText = [[NSString alloc] initWithUTF8String:notification.getInformativeText().toUtf8().data()];
+    NSString *title = notification.getTitle().toNSString();
+    NSString *informativeText = notification.getInformativeText().toNSString();
+    NSString *identifier = notification.getIdentifier().toNSString();
 
     NSUserNotification *osxNotification = [NSUserNotification new];
     osxNotification.title = title;
     osxNotification.subtitle = informativeText;
-    [[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:osxNotification];
+    osxNotification.hasReplyButton = true;
+    osxNotification.identifier = identifier;
+    [notificationCenter scheduleNotification:osxNotification];
 }
 
 void OSXNotificationService::dismissNotifications()
 {
-    [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+    [notificationCenter removeAllDeliveredNotifications];
+}
+
+void OSXNotificationService::notificationClickedDelegate(NSUserNotification *notification)
+{
+    emit notificationClicked(osxNotificationToQtNotification(notification));
+}
+
+void OSXNotificationService::notificationRepliedDelegate(NSUserNotification *notification)
+{
+    emit notificationReplied(osxNotificationToQtNotification(notification), QString::fromNSString(notification.response.string));
 }
 

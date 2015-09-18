@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     notificationService = NotificationService::getNotificationService(this);
+    connect(notificationService, &NotificationService::notificationClicked, this, &MainWindow::notificationClicked);
+    connect(notificationService, &NotificationService::notificationReplied, this, &MainWindow::notificationReplied);
+
     JSNotifcationWrapper *wrapper = new JSNotifcationWrapper(notificationService, this);
     auto channel = new QWebChannel(this);
     channel->registerObject("notificationService", wrapper);
@@ -129,4 +132,14 @@ bool MainWindow::event(QEvent *event)
     }
 
     return QMainWindow::event(event);
+}
+
+void MainWindow::notificationClicked(const Notification &notification)
+{
+    qDebug() << "Notification clicked";
+}
+
+void MainWindow::notificationReplied(const Notification &notification, const QString &reply)
+{
+    qDebug() << "Notification replied";
 }

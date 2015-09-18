@@ -43,12 +43,14 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 mac {
-    OBJECTIVE_HEADERS += notification/osx/osxnotificationservice.h
-    OBJECTIVE_SOURCES += notification/osx/osxnotificationservice.mm
+    HEADERS += notification/osx/osxnotificationservice.h \
+        notification/osx/notificationcenterdelegate.h
+
+    OBJECTIVE_SOURCES += notification/osx/osxnotificationservice.mm \
+    notification/osx/notificationcenterdelegate.mm
 
     LIBS += -framework Foundation -framework AppKit
 }
 
 RESOURCES += \
     resources.qrc
-
