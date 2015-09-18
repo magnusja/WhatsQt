@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
 
+    initActions();
+
     readSettings();
 
     ui->webView->load(QUrl("https://web.whatsapp.com"));
@@ -69,4 +71,31 @@ void MainWindow::readSettings()
     restoreGeometry(settings.value("geometry").toByteArray());
     restoreState(settings.value("state").toByteArray());
     settings.endGroup();
+}
+
+void MainWindow::initActions()
+{
+    QAction *action = ui->webView->pageAction(QWebEnginePage::Copy);
+    action->setShortcut(QKeySequence::Copy);
+    ui->webView->addAction(action);
+
+    action = ui->webView->pageAction(QWebEnginePage::Cut);
+    action->setShortcut(QKeySequence::Cut);
+    ui->webView->addAction(action);
+
+    action = ui->webView->pageAction(QWebEnginePage::Paste);
+    action->setShortcut(QKeySequence::Paste);
+    ui->webView->addAction(action);
+
+    action = ui->webView->pageAction(QWebEnginePage::SelectAll);
+    action->setShortcut(QKeySequence::SelectAll);
+    ui->webView->addAction(action);
+
+    action = ui->webView->pageAction(QWebEnginePage::Reload);
+#ifdef Q_OS_OSX
+    action->setShortcut(QKeySequence("Ctrl+R"));
+#else
+    action->setShortcut(QKeySequence("F5"));
+#endif
+    ui->webView->addAction(action);
 }

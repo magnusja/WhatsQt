@@ -26,6 +26,8 @@ private:
     void saveSettings();
     void readSettings();
 
+    void initActions();
+
 private slots:
     void webViewTitleChanged(const QString &title);
 };

@@ -6,6 +6,9 @@
 class Notification : public QObject {
     Q_OBJECT
 public:
+
+    using QObject::QObject;
+
     QString getTitle() const;
     void setTitle(const QString &value);
 
