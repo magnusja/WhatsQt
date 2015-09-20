@@ -46,6 +46,4 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         callback("granted");
     };
 
-    setInterval(function(){ this.Notification("abend", {"tag": "tag", "bodoy": "body"}) }, 3000);
-
 })
