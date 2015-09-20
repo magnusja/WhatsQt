@@ -10,7 +10,8 @@ JSNotifcationWrapper::JSNotifcationWrapper(NotificationService *service, QObject
     : QObject(parent),
       notificationService(service)
 {
-
+    connect(notificationService, &NotificationService::notificationClicked, this, &JSNotifcationWrapper::onNotificationClicked);
+    connect(notificationService, &NotificationService::notificationReplied, this, &JSNotifcationWrapper::onNotificationReplied);
 }
 
 void JSNotifcationWrapper::deliverNotification(const QString &title, const QMap<QString, QVariant> &options)
@@ -20,8 +21,25 @@ void JSNotifcationWrapper::deliverNotification(const QString &title, const QMap<
     Notification notification;
     notification.setTitle(title);
     notification.setInformativeText(options["body"].toString());
+    notification.setIdentifier(options["tag"].toString());
 
     notificationService->deliverNotification(notification);
+}
+
+void JSNotifcationWrapper::onNotificationClicked(const Notification &notification)
+{
+    QMap<QString, QVariant> options;
+    options["body"] = notification.getInformativeText();
+    options["tag"] = notification.getIdentifier();
+    emit notificationClicked(notification.getTitle(), options);
+}
+
+void JSNotifcationWrapper::onNotificationReplied(const Notification &notification, const QString &reply)
+{
+    QMap<QString, QVariant> options;
+    options["body"] = notification.getInformativeText();
+    options["tag"] = notification.getIdentifier();
+    emit notificationReplied(notification.getTitle(), options, reply);
 }
 
 MainWindow::MainWindow(QWidget *parent) :

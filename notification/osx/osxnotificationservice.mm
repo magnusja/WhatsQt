@@ -9,7 +9,7 @@ Notification osxNotificationToQtNotification(NSUserNotification *osxNotification
     Notification qtNotification;
     qtNotification.setTitle(QString::fromNSString(osxNotification.title));
     qtNotification.setIdentifier(QString::fromNSString(osxNotification.identifier));
-    qtNotification.setInformativeText(QString::fromNSString(osxNotification.informativeText));
+    qtNotification.setInformativeText(QString::fromNSString(osxNotification.subtitle));
 
     return qtNotification;
 }

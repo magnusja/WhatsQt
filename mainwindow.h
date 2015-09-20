@@ -20,6 +20,14 @@ public:
 
 private:
     NotificationService *notificationService;
+
+private slots:
+    void onNotificationClicked(const Notification &notification);
+    void onNotificationReplied(const Notification &notification, const QString &reply);
+
+signals:
+    void notificationClicked(const QString &title, const QMap<QString, QVariant> &options);
+    void notificationReplied(const QString &title, const QMap<QString, QVariant> &options, const QString &reply);
 };
 
 class MainWindow : public QMainWindow
