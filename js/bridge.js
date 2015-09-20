@@ -15,6 +15,22 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         console.log("Notification clicked: " + title + " " + JSON.stringify(options))
         $("span[title='" + title + "'][dir='auto']").click()
     })
+
+    window.notificationService.notificationReplied.connect(function(title, options, reply) {
+        console.log("Notification replied: " + title + " " + JSON.stringify(options) + " " + reply)
+        $("span[title='" + title + "'][dir='auto']").click()
+
+        var input = $("div.input[dir='auto'][contenteditable='true']")
+        input.text(reply)
+
+        // trigger input event to force onChange method of react.js to be called
+        var event = new Event('input', { bubbles: true });
+        input[0].dispatchEvent(event);
+
+        $("button.icon.btn-icon.icon-send.send-container").click()
+    })
+
+
     // hook into the notification API, to deliver notifications native
     this.Notification = function(title, options) {
         console.log("Notification: " + title + " " + JSON.stringify(options))
@@ -27,5 +43,6 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         callback("granted");
     };
 
-})
+    setInterval(function(){ this.Notification("abend", {"tag": "tag", "bodoy": "body"}) }, 3000);
 
+})
