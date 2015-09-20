@@ -20,14 +20,17 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         console.log("Notification replied: " + title + " " + JSON.stringify(options) + " " + reply)
         $("span[title='" + title + "'][dir='auto']").click()
 
-        var input = $("div.input[dir='auto'][contenteditable='true']")
-        input.text(reply)
+        // TODO: maybe listen for html change event instead of waiting 250ms
+        setTimeout(function() {
+            var input = $("div.input[dir='auto'][contenteditable='true']")
+            input.text(reply)
 
-        // trigger input event to force onChange method of react.js to be called
-        var event = new Event('input', { bubbles: true });
-        input[0].dispatchEvent(event);
+            // trigger input event to force onChange method of react.js to be called
+            var event = new Event('input', { bubbles: true });
+            input[0].dispatchEvent(event);
 
-        $("button.icon.btn-icon.icon-send.send-container").click()
+            $("button.icon.btn-icon.icon-send.send-container").click()
+        }, 250)
     })
 
 
