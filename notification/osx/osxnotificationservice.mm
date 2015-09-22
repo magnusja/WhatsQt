@@ -36,13 +36,13 @@ void OSXNotificationService::deliverNotification(const Notification &notificatio
 {
     NSString *title = notification.getTitle().toNSString();
     NSString *informativeText = notification.getInformativeText().toNSString();
-    NSString *identifier = notification.getIdentifier().toNSString();
+    //NSString *identifier = notification.getIdentifier().toNSString();
 
     NSUserNotification *osxNotification = [NSUserNotification new];
     osxNotification.title = title;
-    osxNotification.subtitle = informativeText;
+    osxNotification.informativeText = informativeText;
     osxNotification.hasReplyButton = true;
-    osxNotification.identifier = identifier;
+    //osxNotification.identifier = identifier;
     [notificationCenter scheduleNotification:osxNotification];
 }
 
