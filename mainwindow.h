@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include <notification/notificationservice.h>
+#include "notification/notificationservice.h"
 
 namespace Ui {
 class MainWindow;

@@ -12,6 +12,7 @@ public:
 
     void setApplicationBadge(QString badge);
     void deliverNotification(const Notification &notification);
+    virtual void dismissNotifications();
 };
 
 #endif // NULLNOTIFICATIONSERVICE_H

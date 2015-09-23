@@ -16,3 +16,8 @@ void NullNotificationService::deliverNotification(const Notification &notificati
     Q_UNUSED(notification);
 }
 
+void NullNotificationService::dismissNotifications()
+{
+
+}
+
