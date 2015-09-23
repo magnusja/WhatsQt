@@ -66,4 +66,7 @@ Makefile*
 *.exe
 *.out
 *.app
+/bin
 
+#CLion
+.idea/
