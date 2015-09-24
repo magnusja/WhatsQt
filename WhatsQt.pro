@@ -47,7 +47,8 @@ mac {
         notification/osx/notificationcenterdelegate.h
 
     OBJECTIVE_SOURCES += notification/osx/osxnotificationservice.mm \
-    notification/osx/notificationcenterdelegate.mm
+        notification/osx/notificationcenterdelegate.mm \
+        mainwindow_osx.cpp
 
     LIBS += -framework Foundation -framework AppKit
 }
