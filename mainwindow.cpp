@@ -63,6 +63,11 @@ MainWindow::MainWindow(QWidget *parent) :
     readSettings();
 
     ui->webView->load(QUrl("https://web.whatsapp.com"));
+
+#ifdef Q_OS_MAC
+    setupDockClickHandler();
+#endif
+
 }
 
 MainWindow::~MainWindow()
@@ -92,7 +97,13 @@ void MainWindow::webViewTitleChanged(const QString &title)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     saveSettings();
+
+#ifdef Q_OS_OSX
+    hide();
+    event->ignore();
+#else
     QMainWindow::closeEvent(event);
+#endif
 }
 
 void MainWindow::saveSettings()
@@ -154,6 +165,7 @@ bool MainWindow::event(QEvent *event)
 void MainWindow::notificationClicked(const Notification &notification)
 {
     qDebug() << "Notification clicked";
+
 }
 
 void MainWindow::notificationReplied(const Notification &notification, const QString &reply)

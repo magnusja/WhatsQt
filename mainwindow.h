@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCloseEvent>
+
 
 #include "notification/notificationservice.h"
 
@@ -51,6 +53,10 @@ private:
     void readSettings();
 
     void initActions();
+
+#ifdef Q_OS_OSX
+    void setupDockClickHandler();
+#endif
 
 private slots:
     void webViewTitleChanged(const QString &title);

@@ -3,6 +3,16 @@ project(WhatsQt)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+if(MSVC)
+    if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+        string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+    else()
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+    endif()
+else()
+    add_definitions("-Wall")
+endif()
+
 set(SOURCE_FILES
     notification/notificationservice.cpp
     notification/nullnotificationservice.cpp
@@ -14,7 +24,8 @@ set(SOURCE_FILES
 if(APPLE)
     list(APPEND SOURCE_FILES
          notification/osx/notificationcenterdelegate.mm
-         notification/osx/osxnotificationservice.mm)
+         notification/osx/osxnotificationservice.mm
+            mainwindow_osx.cpp)
 
     find_library(FOUNDATION Foundation)
     find_library(APP_KIT AppKit)
