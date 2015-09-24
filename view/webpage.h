@@ -27,6 +27,9 @@ private:
     };
 
     OpenUrlWebPage* openUrlWebPage;
+
+private slots:
+    void onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEnginePage::Feature feature);
 };
 
 #endif // WEBPAGE_H
