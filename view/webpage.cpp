@@ -1,4 +1,6 @@
-#include<QDesktopServices>
+#include <QDesktopServices>
+#include <QSettings>
+#include <QFileDialog>
 
 #include "webpage.h"
 
@@ -48,5 +50,29 @@ void WebPage::javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, cons
     qDebug() << "JS Console: src id: " << sourceID;
     qDebug() << "JS Console: level: " << level;
     qDebug() << "JS Console: " << message;
+}
+
+QStringList WebPage::chooseFiles(FileSelectionMode mode, const QStringList &oldFiles, const QStringList &acceptedMimeTypes)
+{
+    QStringList result;
+
+    QSettings settings;
+    QString suggestedPath;
+    suggestedPath = settings.value("lastMediaPath", QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0]).toString();
+
+    if(mode == QWebEnginePage::FileSelectOpen) {
+        QString file = QFileDialog::getOpenFileName(view(), tr("Choose Media File"), suggestedPath);
+        if(!file.isNull()) {
+            result.append(file);
+        }
+    } else {
+        result = QFileDialog::getOpenFileNames(view(), tr("Choose Media Files"), suggestedPath);
+    }
+
+    if(!result.isEmpty()) {
+        settings.setValue("lastMediaPath", result[0]);
+    }
+
+    return result;
 }
 

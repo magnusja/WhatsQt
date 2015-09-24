@@ -17,6 +17,7 @@ public:
 protected:
     QWebEnginePage* createWindow(WebWindowType type);
     void javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, const QString &message, int lineNumber, const QString &sourceID);
+    QStringList chooseFiles(FileSelectionMode mode, const QStringList &oldFiles, const QStringList &acceptedMimeTypes);
 
 private:
     // Hack to open links in desktop browser see also createWindow implementation
