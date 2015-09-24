@@ -1,7 +1,6 @@
 #include <QRegExp>
 #include <QWebChannel>
 #include <QSettings>
-#include <QMap>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"

@@ -10,6 +10,8 @@ WebView::WebView(QWidget *parent)
     : QWebEngineView(parent)
 {
     QWebEngineProfile *profile = new QWebEngineProfile(QLatin1String("WhatsQt"), this);
+    connect(profile, &QWebEngineProfile::downloadRequested, this, &WebView::downloadRequested);
+
 #ifdef Q_OS_OSX
     profile->setHttpUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/600.7.12");
 #elif defined(Q_OS_LINUX)
@@ -49,4 +51,11 @@ void WebView::insertJavaScript(QWebEngineScriptCollection *scripts)
     script.setInjectionPoint(QWebEngineScript::DocumentReady);
     script.setWorldId(QWebEngineScript::MainWorld);
     scripts->insert(script);
+}
+
+
+void WebView::downloadRequested(QWebEngineDownloadItem *download)
+{
+    qDebug() << "Download requested: " << download->url() << download->path();
+    download->accept();
 }

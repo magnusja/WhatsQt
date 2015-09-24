@@ -58,6 +58,7 @@ void WebPage::javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, cons
 
 QStringList WebPage::chooseFiles(FileSelectionMode mode, const QStringList &oldFiles, const QStringList &acceptedMimeTypes)
 {
+    // TODO: support mime types
     QStringList result;
 
     QSettings settings;

@@ -3,6 +3,8 @@
 
 #include <QWebEngineView>
 #include <QWebEngineScriptCollection>
+#include <QWebEngineDownloadItem>
+
 
 class WebView : public QWebEngineView
 {
@@ -13,6 +15,9 @@ public:
 
 private:
     void insertJavaScript(QWebEngineScriptCollection *scripts);
+
+private slots:
+    void downloadRequested(QWebEngineDownloadItem *download);
 };
 
 #endif // WEBVIEW_H
