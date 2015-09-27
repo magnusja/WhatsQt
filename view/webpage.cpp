@@ -1,10 +1,9 @@
 #include <QDesktopServices>
 #include <QSettings>
 #include <QFileDialog>
-#include <QMessageBox>
-#include <QCheckBox>
 
 #include "webpage.h"
+#include "webview.h"
 
 bool WebPage::OpenUrlWebPage::acceptNavigationRequest(const QUrl &url, NavigationType /*type*/, bool /*isMainFrame*/)
 {
@@ -17,7 +16,6 @@ WebPage::WebPage(QWebEngineProfile *profile, QWidget *parent)
     : QWebEnginePage(profile, parent),
       openUrlWebPage(new WebPage::OpenUrlWebPage())
 {
-    connect(this, &QWebEnginePage::featurePermissionRequested, this, &WebPage::onFeaturePermissionRequest);
 }
 
 WebPage::~WebPage()
@@ -79,62 +77,5 @@ QStringList WebPage::chooseFiles(FileSelectionMode mode, const QStringList &oldF
     }
 
     return result;
-}
-
-void WebPage::onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEnginePage::Feature feature)
-{
-    auto permissionString = [](QWebEnginePage::Feature feature) {
-        switch(feature)
-        {
-            case QWebEnginePage::Geolocation:
-                return tr("current location");
-            case QWebEnginePage::MediaAudioVideoCapture:
-                return tr("camera and microphone");
-            case QWebEnginePage::MediaAudioCapture:
-                return tr("microphone");
-            case QWebEnginePage::MediaVideoCapture:
-                return tr("camera");
-            default:
-                return tr("unknown");
-        }
-    };
-
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << securityOrigin << " " << feature;
-
-    QSettings settings;
-    if(settings.value(QString("permission_granted_%1").arg(feature), false).toBool())
-    {
-        setFeaturePermission(securityOrigin, feature, QWebEnginePage::PermissionGrantedByUser);
-        return;
-    }
-
-    QMessageBox *box = new QMessageBox(QMessageBox::Question,
-                                       tr("Permission Request"),
-                                       tr("WhatsApp Web wants to access your %1, do you want to allow that?").arg(permissionString(feature)),
-                                       QMessageBox::Yes | QMessageBox::No,
-                                       view());
-
-    QCheckBox *checkBox = new QCheckBox(tr("Remember this decision"), box);
-    box->setCheckBox(checkBox);
-
-    box->exec();
-
-    bool accepted = box->clickedButton() == box->button(QMessageBox::Yes);
-    if(accepted)
-    {
-        qDebug() << "Accepted feature request";
-        setFeaturePermission(securityOrigin, feature, QWebEnginePage::PermissionGrantedByUser);
-    }
-    else
-    {
-        qDebug() << "Denied feature request";
-        setFeaturePermission(securityOrigin, feature, QWebEnginePage::PermissionDeniedByUser);
-    }
-
-    if(checkBox->isChecked())
-    {
-        settings.setValue(QString("permission_granted_%1").arg(feature), accepted);
-    }
 }
 

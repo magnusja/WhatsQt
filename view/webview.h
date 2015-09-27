@@ -18,6 +18,7 @@ private:
 
 private slots:
     void downloadRequested(QWebEngineDownloadItem *download);
+    void onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEnginePage::Feature feature);
 };
 
 #endif // WEBVIEW_H
