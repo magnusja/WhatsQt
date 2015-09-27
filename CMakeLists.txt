@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.3)
-project(WhatsQt)
+project(WhatsQt VERSION 0.1)
+
+set(MACOSX_BUNDLE_BUNDLE_NAME "WhatsQt")
+set(MACOSX_BUNDLE_INFO_STRING "WhatsApp Web as a native application")
+set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -54,6 +58,7 @@ if(APPLE)
 
     set(CPACK_GENERATOR "DragNDrop")
     set(CPACK_DMG_DS_STORE "${CMAKE_SOURCE_DIR}/installer/osx/ds_store")
+    set(CPACK_DMG_VOLUME_NAME "WhatsQt")
 endif()
 
 include(CPACK)
