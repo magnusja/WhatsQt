@@ -4,6 +4,7 @@
 
 #include "mainwindow.h"
 
+// TODO: static instance is not nice :/
 MainWindow *mainWindow;
 
 bool dockClickHandler(id self, SEL _cmd, ...)
