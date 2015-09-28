@@ -161,11 +161,14 @@ bool MainWindow::event(QEvent *event)
 
 void MainWindow::notificationClicked(const Notification &notification)
 {
+    Q_UNUSED(notification)
     qDebug() << "Notification clicked";
 
 }
 
 void MainWindow::notificationReplied(const Notification &notification, const QString &reply)
 {
+    Q_UNUSED(notification)
+    Q_UNUSED(reply)
     qDebug() << "Notification replied";
 }
