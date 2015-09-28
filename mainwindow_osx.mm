@@ -59,7 +59,7 @@ void updateTitleBarDelegate(id self, SEL _cmd)
     Q_UNUSED(self)
     Q_UNUSED(_cmd)
 
-    qDebug() << "NSWindow did resize";
+    qDebug() << "NSWindow: updating title bar";
 
     auto nativeView = (NSView *)qtMainWindow->winId();
     updateTitleBar(nativeView.window);
@@ -98,7 +98,7 @@ void setupNSWindow(NSWindow *window)
 
     // TODO: can the proper update of the title bar be archived easier?
     Class cls = [[window delegate] class];
-    SEL shouldHandle = @selector(updateTitleBarDelegate:);
+    SEL shouldHandle = @selector(windowDidResize:);
 
     if (class_getInstanceMethod(cls, shouldHandle))
     {
