@@ -55,7 +55,9 @@ private:
     void initActions();
 
 #ifdef Q_OS_OSX
-    void setupDockClickHandler();
+    void nativeSetup();
+#else
+    void nativeSetup() {}
 #endif
 
 private slots:

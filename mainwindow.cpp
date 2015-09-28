@@ -64,10 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->webView->load(QUrl("https://web.whatsapp.com"));
 
-#ifdef Q_OS_MAC
-    setupDockClickHandler();
-#endif
-
+    nativeSetup();
 }
 
 MainWindow::~MainWindow()

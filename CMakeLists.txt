@@ -29,7 +29,7 @@ if(APPLE)
     list(APPEND SOURCE_FILES
          notification/osx/notificationcenterdelegate.mm
          notification/osx/osxnotificationservice.mm
-            mainwindow_osx.cpp)
+         mainwindow_osx.mm)
 
     find_library(FOUNDATION Foundation)
     find_library(APP_KIT AppKit)
