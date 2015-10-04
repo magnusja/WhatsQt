@@ -86,7 +86,7 @@ void MainWindow::webViewTitleChanged(const QString &title)
     if(badge.isEmpty())
         setWindowTitle("WhatsQt");
     else
-        setWindowTitle(QString("(%0) WhatsQt").arg(badge));
+        setWindowTitle((badge.toInt() == 1 ? tr("%1 unread message") : tr("%1 unread messages")).arg(badge) + " - WhatsQt");
 
     notificationService->setApplicationBadge(badge);
 }
