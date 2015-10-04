@@ -47,17 +47,3 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
     };
 
 })
-
-function hideAvatar() {
-    var styleAdditions = document.createElement('style');
-    styleAdditions.textContent = ' \
-        div.pane-list-user > div.avatar { width: 0px; height: 0px; } \
-    ';
-
-    document.documentElement.appendChild(styleAdditions)
-}
-
-// Hide avatar on OS X, because we want to have title bar buttons there
-if(navigator.userAgent.indexOf('Mac OS X') != -1) {
-    hideAvatar()
-}
