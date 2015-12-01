@@ -61,4 +61,4 @@ if(APPLE)
     set(CPACK_DMG_VOLUME_NAME "WhatsQt")
 endif()
 
-include(CPACK)
+include(CPack)
