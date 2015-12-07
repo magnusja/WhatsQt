@@ -66,6 +66,9 @@ void WebView::insertJavaScript(QWebEngineScriptCollection *scripts)
 void WebView::downloadRequested(QWebEngineDownloadItem *download)
 {
     qDebug() << "Download requested: " << download->url() << download->path();
+    connect(download, &QWebEngineDownloadItem::stateChanged, this, &WebView::onDownloadStateChanged);
+    connect(download, &QWebEngineDownloadItem::finished, this, &WebView::onDownloadFinished);
+    connect(download, &QWebEngineDownloadItem::downloadProgress, this, &WebView::onDownloadProgress);
     download->accept();
 }
 
@@ -124,4 +127,19 @@ void WebView::onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEngineP
     {
         settings.setValue(QString("permission_granted_%1").arg(feature), accepted);
     }
+}
+
+void WebView::onDownloadFinished()
+{
+    qDebug() << "Download finished";
+}
+
+void WebView::onDownloadStateChanged(QWebEngineDownloadItem::DownloadState state)
+{
+    qDebug() << "Download state changed to: " << state;
+}
+
+void WebView::onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+    qDebug() << "Downloaded " << bytesReceived << " bytes from " << bytesTotal;
 }

@@ -19,6 +19,10 @@ private:
 private slots:
     void downloadRequested(QWebEngineDownloadItem *download);
     void onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEnginePage::Feature feature);
+
+    void onDownloadStateChanged(QWebEngineDownloadItem::DownloadState state);
+    void onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void onDownloadFinished();
 };
 
 #endif // WEBVIEW_H
