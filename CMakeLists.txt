@@ -24,19 +24,23 @@ set(SOURCE_FILES
     view/webpage.cpp
     view/webview.cpp
     main.cpp
-    mainwindow.cpp)
+    mainwindow.cpp
+    resources.qrc)
 
 if(APPLE)
+    set(APP_ICON ${CMAKE_CURRENT_SOURCE_DIR}/artwork/icon/icon.icns)
+    set_source_files_properties(${APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
     list(APPEND SOURCE_FILES
          notification/osx/notificationcenterdelegate.mm
          notification/osx/osxnotificationservice.mm
-         mainwindow_osx.mm)
+         mainwindow_osx.mm
+         ${APP_ICON})
 
     find_library(FOUNDATION Foundation)
     find_library(APP_KIT AppKit)
 
-    set(APP_ICON ${CMAKE_CURRENT_SOURCE_DIR}/artwork/icon/icon.icns)
-    set_source_files_properties(${APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+    set(LIBS ${FOUNDATION} ${APP_KIT})
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -48,9 +52,9 @@ find_package(Qt5Widgets)
 find_package(Qt5WebEngineWidgets)
 find_package(Qt5WebChannel)
 
-add_executable(WhatsQt MACOSX_BUNDLE ${SOURCE_FILES} resources.qrc ${APP_ICON})
+add_executable(WhatsQt MACOSX_BUNDLE ${SOURCE_FILES})
 if(APPLE)
-    target_link_libraries(WhatsQt ${FOUNDATION} ${APP_KIT})
+    target_link_libraries(WhatsQt ${LIBS})
 endif()
 
 qt5_use_modules(WhatsQt Widgets WebEngineWidgets WebChannel)
