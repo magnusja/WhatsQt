@@ -4,6 +4,7 @@ project(WhatsQt VERSION 0.1)
 set(MACOSX_BUNDLE_BUNDLE_NAME "WhatsQt")
 set(MACOSX_BUNDLE_INFO_STRING "WhatsApp Web as a native application")
 set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
+set(MACOSX_BUNDLE_ICON_FILE icon.icns)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -33,6 +34,9 @@ if(APPLE)
 
     find_library(FOUNDATION Foundation)
     find_library(APP_KIT AppKit)
+
+    set(APP_ICON ${CMAKE_CURRENT_SOURCE_DIR}/artwork/icon/icon.icns)
+    set_source_files_properties(${APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -44,7 +48,7 @@ find_package(Qt5Widgets)
 find_package(Qt5WebEngineWidgets)
 find_package(Qt5WebChannel)
 
-add_executable(WhatsQt MACOSX_BUNDLE ${SOURCE_FILES} resources.qrc)
+add_executable(WhatsQt MACOSX_BUNDLE ${SOURCE_FILES} resources.qrc ${APP_ICON})
 if(APPLE)
     target_link_libraries(WhatsQt ${FOUNDATION} ${APP_KIT})
 endif()
