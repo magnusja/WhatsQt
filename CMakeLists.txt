@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.3)
 project(WhatsQt VERSION 0.1)
 
-set(MACOSX_BUNDLE_BUNDLE_NAME "WhatsQt")
-set(MACOSX_BUNDLE_INFO_STRING "WhatsApp Web as a native application")
-set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
-set(MACOSX_BUNDLE_ICON_FILE icon.icns)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 if(MSVC)
@@ -28,19 +23,7 @@ set(SOURCE_FILES
     resources.qrc)
 
 if(APPLE)
-    set(APP_ICON ${CMAKE_CURRENT_SOURCE_DIR}/artwork/icon/icon.icns)
-    set_source_files_properties(${APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-
-    list(APPEND SOURCE_FILES
-         notification/osx/notificationcenterdelegate.mm
-         notification/osx/osxnotificationservice.mm
-         mainwindow_osx.mm
-         ${APP_ICON})
-
-    find_library(FOUNDATION Foundation)
-    find_library(APP_KIT AppKit)
-
-    set(LIBS ${FOUNDATION} ${APP_KIT})
+    include(cmake/osx.cmake)
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -53,20 +36,13 @@ find_package(Qt5WebEngineWidgets)
 find_package(Qt5WebChannel)
 
 add_executable(WhatsQt MACOSX_BUNDLE ${SOURCE_FILES})
-if(APPLE)
-    target_link_libraries(WhatsQt ${LIBS})
-endif()
+target_link_libraries(WhatsQt ${LIBS})
+
 
 qt5_use_modules(WhatsQt Widgets WebEngineWidgets WebChannel)
 
 if(APPLE)
-    # make sure that macdeployqt is exported in PATH!
-    install(CODE "execute_process(COMMAND macdeployqt ${CMAKE_BINARY_DIR}/WhatsQt.app)")
-    install(TARGETS WhatsQt DESTINATION ./)
-
-    set(CPACK_GENERATOR "DragNDrop")
-    set(CPACK_DMG_DS_STORE "${CMAKE_SOURCE_DIR}/installer/osx/ds_store")
-    set(CPACK_DMG_VOLUME_NAME "WhatsQt")
+    include(cmake/osx.install.cmake)
 endif()
 
 include(CPack)
