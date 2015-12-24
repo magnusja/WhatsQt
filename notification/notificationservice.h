@@ -33,6 +33,8 @@ public:
     QString getIdentifier() const;
     void setIdentifier(const QString &value);
 
+    uint getUIntIdentifier() const;
+
 private:
     QString title;
     QString infomativeText;

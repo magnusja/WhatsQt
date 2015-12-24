@@ -41,7 +41,7 @@ void FreedesktopNotificationService::setApplicationBadge(QString badge)
 
 void FreedesktopNotificationService::deliverNotification(const Notification &notification)
 {
-    freedesktopInterface->Notify(qAppName(), notification.getIdentifier().toUInt(), QString(), notification.getTitle(),
+    freedesktopInterface->Notify(qAppName(), notification.getUIntIdentifier(), QString(), notification.getTitle(),
         notification.getInformativeText(), QStringList(), QVariantMap(), 3000);
 }
 

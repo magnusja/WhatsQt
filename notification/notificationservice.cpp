@@ -54,6 +54,15 @@ void Notification::setIdentifier(const QString &value)
     identifier = value;
 }
 
+uint Notification::getUIntIdentifier() const {
+    QString digits;
+    foreach(QChar c, identifier)
+    {
+        if(c.isDigit()) digits.append(c);
+    }
+    return digits.toUInt();
+}
+
 NotificationService::NotificationService(QObject *parent)
     : QObject(parent)
 {
