@@ -15,21 +15,29 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NULLNOTIFICATIONSERVICE_H
-#define NULLNOTIFICATIONSERVICE_H
+#ifndef WHATSQT_FREEDESKTOPNOTIFICATIONSERVICE_H
+#define WHATSQT_FREEDESKTOPNOTIFICATIONSERVICE_H
 
-#include "notificationservice.h"
+#include <notification/notificationservice.h>
 
-class NullNotificationService : public NotificationService
+#include <FreedesktopNotifications.h>
+
+class FreedesktopNotificationService : public NotificationService
 {
-    Q_OBJECT
+friend class NotificationService;
+
+Q_OBJECT
 
 public:
-    NullNotificationService(QObject *parent = 0);
-
     void setApplicationBadge(QString badge);
     void deliverNotification(const Notification &notification);
     void dismissNotifications();
+
+private:
+    FreedesktopNotificationService(QObject *parent = 0);
+
+    org::freedesktop::Notifications *freedesktopInterface;
 };
 
-#endif // NULLNOTIFICATIONSERVICE_H
+
+#endif //WHATSQT_FREEDESKTOPNOTIFICATIONSERVICE_H

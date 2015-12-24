@@ -20,6 +20,8 @@
 
 #ifdef Q_OS_OSX
 #include "osx/osxnotificationservice.h"
+#elif defined(Q_OS_LINUX)
+#include "linux/FreedesktopNotificationService.h"
 #endif
 
 QString Notification::getTitle() const
@@ -62,6 +64,8 @@ NotificationService* NotificationService::getNotificationService(QObject *parent
 {
 #ifdef Q_OS_OSX
     return new OSXNotificationService(parent);
+#elif defined(Q_OS_LINUX)
+    return new FreedesktopNotificationService(parent);
 #else
     return new NullNotificationService(parent);
 #endif

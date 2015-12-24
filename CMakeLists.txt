@@ -24,6 +24,8 @@ set(SOURCE_FILES
 
 if(APPLE)
     include(cmake/osx.cmake)
+elseif(UNIX)
+    include(cmake/linux.cmake)
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -39,7 +41,7 @@ add_executable(WhatsQt MACOSX_BUNDLE ${SOURCE_FILES})
 target_link_libraries(WhatsQt ${LIBS})
 
 
-qt5_use_modules(WhatsQt Widgets WebEngineWidgets WebChannel)
+qt5_use_modules(WhatsQt Widgets WebEngineWidgets WebChannel ${ADDITIONAL_QT_MODULES})
 
 if(APPLE)
     include(cmake/osx.install.cmake)
