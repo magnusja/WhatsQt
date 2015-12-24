@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>js/bridge.js</file>
+        <file>artwork/icon/icon256.png</file>
     </qresource>
 </RCC>

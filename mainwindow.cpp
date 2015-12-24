@@ -64,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifndef Q_OS_OSX
+    setWindowIcon(QIcon(":/artwork/icon/icon256.png"));
+#endif
+
     notificationService = NotificationService::getNotificationService(this);
     connect(notificationService, &NotificationService::notificationClicked, this, &MainWindow::notificationClicked);
     connect(notificationService, &NotificationService::notificationReplied, this, &MainWindow::notificationReplied);
