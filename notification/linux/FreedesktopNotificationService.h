@@ -18,8 +18,9 @@
 #ifndef WHATSQT_FREEDESKTOPNOTIFICATIONSERVICE_H
 #define WHATSQT_FREEDESKTOPNOTIFICATIONSERVICE_H
 
-#include <notification/notificationservice.h>
+#include <QTemporaryFile>
 
+#include <notification/notificationservice.h>
 #include <FreedesktopNotifications.h>
 
 class FreedesktopNotificationService : public NotificationService
@@ -37,6 +38,9 @@ private:
     FreedesktopNotificationService(QObject *parent = 0);
 
     org::freedesktop::Notifications *freedesktopInterface;
+    // holds application image file to show in a notification
+    // copied from resources.qrc
+    QTemporaryFile *imageFile;
 
 private slots:
     void onNotificationActionInvoked(const uint id, const QString &actionKey);

@@ -17,12 +17,21 @@
 
 #include <QApplication>
 #include <QtDBus/QDBusPendingReply>
+#include <QtDBus/QDBusConnection>
+#include <QFile>
 
 #include "FreedesktopNotificationService.h"
 
 FreedesktopNotificationService::FreedesktopNotificationService(QObject *parent)
-        : NotificationService(parent)
+        : NotificationService(parent),
+          imageFile(new QTemporaryFile(this))
 {
+    // TODO: this should be a temporary hack
+    imageFile->open(); // create so fileName() returns path
+    QFile image(":/artwork/icon/icon256.png");
+    image.open(QIODevice::ReadOnly);
+    imageFile->write(image.readAll());
+
     freedesktopInterface = new org::freedesktop::Notifications(QStringLiteral("org.freedesktop.Notifications"),
                                                                QStringLiteral("/org/freedesktop/Notifications"),
                                                                QDBusConnection::sessionBus(), this);
@@ -50,7 +59,7 @@ void FreedesktopNotificationService::deliverNotification(const Notification &not
 {
     // TODO: passing zero sets new an id for this notification -> how can we identify it 'backwards'
     // to enable action invokes
-    freedesktopInterface->Notify(qAppName(), 0, QString(), notification.getTitle(),
+    freedesktopInterface->Notify(qAppName(), 0, imageFile->fileName(), notification.getTitle(),
         notification.getInformativeText(), QStringList(), QVariantMap(), 3000);
 }
 
