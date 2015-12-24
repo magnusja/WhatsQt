@@ -16,6 +16,7 @@
  */
 
 #include <QApplication>
+#include <QtDBus/QDBusPendingReply>
 
 #include "FreedesktopNotificationService.h"
 
@@ -25,6 +26,12 @@ FreedesktopNotificationService::FreedesktopNotificationService(QObject *parent)
     freedesktopInterface = new org::freedesktop::Notifications(QStringLiteral("org.freedesktop.Notifications"),
                                                                QStringLiteral("/org/freedesktop/Notifications"),
                                                                QDBusConnection::sessionBus(), this);
+
+    connect(freedesktopInterface, &org::freedesktop::Notifications::ActionInvoked, this, &FreedesktopNotificationService::onNotificationActionInvoked);
+
+    connect(freedesktopInterface, &org::freedesktop::Notifications::NotificationClosed, this, [this](const uint id, const uint reason) {
+       qDebug() << "Notification Closed: " << id << " " << reason;
+    });
 
     QDBusPendingReply<QStringList> reply = freedesktopInterface->GetCapabilities();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
@@ -41,11 +48,18 @@ void FreedesktopNotificationService::setApplicationBadge(QString badge)
 
 void FreedesktopNotificationService::deliverNotification(const Notification &notification)
 {
-    freedesktopInterface->Notify(qAppName(), notification.getUIntIdentifier(), QString(), notification.getTitle(),
+    // TODO: passing zero sets new an id for this notification -> how can we identify it 'backwards'
+    // to enable action invokes
+    freedesktopInterface->Notify(qAppName(), 0, QString(), notification.getTitle(),
         notification.getInformativeText(), QStringList(), QVariantMap(), 3000);
 }
 
 void FreedesktopNotificationService::dismissNotifications()
 {
 
+}
+
+void FreedesktopNotificationService::onNotificationActionInvoked(const uint id, const QString &actionKey)
+{
+    qDebug() << "Freedesktop Notification Action Invoked " << id << " " << actionKey;
 }

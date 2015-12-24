@@ -37,6 +37,9 @@ private:
     FreedesktopNotificationService(QObject *parent = 0);
 
     org::freedesktop::Notifications *freedesktopInterface;
+
+private slots:
+    void onNotificationActionInvoked(const uint id, const QString &actionKey);
 };
 
 
