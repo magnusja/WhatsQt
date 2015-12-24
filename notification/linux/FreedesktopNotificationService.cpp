@@ -15,6 +15,8 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QApplication>
+
 #include "FreedesktopNotificationService.h"
 
 FreedesktopNotificationService::FreedesktopNotificationService(QObject *parent)
@@ -23,6 +25,13 @@ FreedesktopNotificationService::FreedesktopNotificationService(QObject *parent)
     freedesktopInterface = new org::freedesktop::Notifications(QStringLiteral("org.freedesktop.Notifications"),
                                                                QStringLiteral("/org/freedesktop/Notifications"),
                                                                QDBusConnection::sessionBus(), this);
+
+    QDBusPendingReply<QStringList> reply = freedesktopInterface->GetCapabilities();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [reply, watcher, this]() {
+        qDebug() << "GetCapabilities reply: " << reply.value();
+        watcher->deleteLater();
+    });
 }
 
 void FreedesktopNotificationService::setApplicationBadge(QString badge)
@@ -32,7 +41,8 @@ void FreedesktopNotificationService::setApplicationBadge(QString badge)
 
 void FreedesktopNotificationService::deliverNotification(const Notification &notification)
 {
-    Q_UNUSED(notification);
+    freedesktopInterface->Notify(qAppName(), notification.getIdentifier().toUInt(), QString(), notification.getTitle(),
+        notification.getInformativeText(), QStringList(), QVariantMap(), 3000);
 }
 
 void FreedesktopNotificationService::dismissNotifications()
