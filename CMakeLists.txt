@@ -18,13 +18,17 @@ add_definitions(-DAPP_VERSION="${PROJECT_VERSION}")
 set(SOURCE_FILES
         notification/notificationservice.cpp
         notification/nullnotificationservice.cpp
+        notification/TrayNotificationService.cpp
         view/webpage.cpp
         view/webview.cpp
         dialog/AboutDialog.cpp
         dialog/PreferencesDialog.cpp
+        util/Preferences.cpp
+        util/Constants.cpp
         main.cpp
         mainwindow.cpp
-        resources.qrc util/Preferences.cpp util/Preferences.h notification/TrayNotificationService.cpp notification/TrayNotificationService.h)
+        resources.qrc
+        )
 
 if(APPLE)
     include(cmake/osx.cmake)

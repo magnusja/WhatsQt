@@ -15,28 +15,11 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "TrayNotificationService.h"
-#include "util/Constants.h"
+#ifndef WHATSQT_CONSTANTS_H
+#define WHATSQT_CONSTANTS_H
 
-TrayNotificationService::TrayNotificationService(QObject *parent)
-    : NotificationService(parent)
-{
-    trayIcon.setIcon(appIcon);
-    trayIcon.hide();
-}
+#include <QIcon>
 
-void TrayNotificationService::dismissNotifications()
-{
-}
+extern QIcon appIcon;
 
-void TrayNotificationService::deliverNotification(const Notification &notification)
-{
-    trayIcon.show();
-    trayIcon.showMessage(notification.getTitle(), notification.getInformativeText(), QSystemTrayIcon::Information, 3000);
-    trayIcon.hide();
-}
-
-void TrayNotificationService::setApplicationBadge(QString badge)
-{
-    Q_UNUSED(badge);
-}
+#endif //WHATSQT_CONSTANTS_H
