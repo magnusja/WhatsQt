@@ -70,6 +70,7 @@ private:
     void readSettings();
 
     void initActions();
+    void initMenus();
 
 #ifdef Q_OS_OSX
     void nativeSetup();

@@ -18,6 +18,7 @@ set(SOURCE_FILES
     notification/nullnotificationservice.cpp
     view/webpage.cpp
     view/webview.cpp
+    dialog/AboutDialog.cpp
     main.cpp
     mainwindow.cpp
     resources.qrc)

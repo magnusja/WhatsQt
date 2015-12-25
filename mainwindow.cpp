@@ -18,9 +18,14 @@
 #include <QRegExp>
 #include <QWebChannel>
 #include <QSettings>
+#include <QMenuBar>
+#include <QAction>
+#include <QMenu>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "dialog/AboutDialog.h"
 
 JSNotifcationWrapper::JSNotifcationWrapper(NotificationService *service, QObject *parent)
     : QObject(parent),
@@ -80,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
 
     initActions();
+    initMenus();
 
     readSettings();
 
@@ -167,6 +173,22 @@ void MainWindow::initActions()
     action->setShortcut(QKeySequence("F5"));
 #endif
     ui->webView->addAction(action);
+}
+
+void MainWindow::initMenus()
+{
+    QAction *aboutAction = new QAction(tr("About"), this);
+    connect(aboutAction, &QAction::triggered, this, [this]() {
+        AboutDialog dialog(this);
+        dialog.exec();
+    });
+
+    QAction *aboutQt = new QAction(tr("About Qt"), this);
+    connect(aboutQt, &QAction::triggered, qApp, QApplication::aboutQt);
+
+    QMenu *aboutMenu = menuBar()->addMenu(tr("Help"));
+    aboutMenu->addAction(aboutAction);
+    aboutMenu->addAction(aboutQt);
 }
 
 bool MainWindow::event(QEvent *event)
