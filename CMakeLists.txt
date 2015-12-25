@@ -55,4 +55,9 @@ set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "WhatsQt is bringing WhatsApp Web natively to OS X, Linux and Windows.")
 set(CPACK_PACKAGE_CONTACT mjahnen)
 
+include(cmake/gitcommitid.cmake)
+
+# Configure file with build deployment data for travis
+configure_file(travis/bintray.json.in ${CMAKE_BINARY_DIR}/bintray.json)
+
 include(CPack)
