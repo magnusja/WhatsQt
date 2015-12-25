@@ -20,7 +20,7 @@
 TrayNotificationService::TrayNotificationService(QObject *parent)
     : NotificationService(parent)
 {
-
+    trayIcon.hide();
 }
 
 void TrayNotificationService::dismissNotifications()
@@ -29,7 +29,9 @@ void TrayNotificationService::dismissNotifications()
 
 void TrayNotificationService::deliverNotification(const Notification &notification)
 {
+    trayIcon.show();
     trayIcon.showMessage(notification.getTitle(), notification.getInformativeText(), QSystemTrayIcon::Information, 3000);
+    trayIcon.hide();
 }
 
 void TrayNotificationService::setApplicationBadge(QString badge)

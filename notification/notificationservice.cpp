@@ -17,6 +17,8 @@
 
 #include "notificationservice.h"
 #include "nullnotificationservice.h"
+#include "TrayNotificationService.h"
+#include "util/Preferences.h"
 
 #ifdef Q_OS_OSX
 #include "osx/osxnotificationservice.h"
@@ -70,6 +72,27 @@ NotificationService::NotificationService(QObject *parent)
 }
 
 NotificationService* NotificationService::getNotificationService(QObject *parent)
+{
+    Preferences preferences;
+
+    switch(preferences.getNotificationType())
+    {
+        case Preferences::NotificationTypeNative:
+            qDebug() << "Using native notifications";
+            return getNativeNotificationService(parent);
+
+        case Preferences::NotificationTypeSystemTray:
+            qDebug() << "Using tray notifications";
+            return new TrayNotificationService(parent);
+
+        case Preferences::NotificationTypeNull:
+            qDebug() << "Using null notifications";
+            return new NullNotificationService(parent);
+    }
+
+}
+
+NotificationService *NotificationService::getNativeNotificationService(QObject *parent)
 {
 #ifdef Q_OS_OSX
     return new OSXNotificationService(parent);

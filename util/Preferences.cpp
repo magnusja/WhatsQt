@@ -24,7 +24,7 @@ void Preferences::setNotificationType(NotificationType type)
     settings.endGroup();
 }
 
-NotificationType Preferences::getNotificationType()
+Preferences::NotificationType Preferences::getNotificationType()
 {
     settings.beginGroup("general");
     auto type = (NotificationType) settings.value("notification_type", 0).toInt();

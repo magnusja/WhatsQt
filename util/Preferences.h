@@ -23,14 +23,16 @@
 #include <QMap>
 #include <QSettings>
 
-enum NotificationType {
-    Native = 0,
-    SystemTray,
-    Null
-};
-
 class Preferences {
+
 public:
+
+    enum NotificationType {
+        NotificationTypeNative = 0,
+        NotificationTypeSystemTray,
+        NotificationTypeNull
+    };
+
     void setNotificationType(NotificationType type);
     NotificationType getNotificationType();
 

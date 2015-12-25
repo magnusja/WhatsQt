@@ -36,7 +36,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
 
         // see http://doc.qt.io/qt-4.8/qbuttongroup.html#addButton
         int type = qAbs(ui->notificationButtonGroup->checkedId()) - 2;
-        preferences.setNotificationType((NotificationType) type);
+        preferences.setNotificationType((Preferences::NotificationType) type);
 
         preferences.setPermission(QWebEnginePage::Geolocation, ui->locationCheckBox->isChecked());
         preferences.setPermission(QWebEnginePage::MediaVideoCapture, ui->cameraCheckBox->isChecked());

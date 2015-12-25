@@ -55,6 +55,9 @@ public:
 protected:
     NotificationService(QObject *parent = 0);
 
+private:
+    static NotificationService *getNativeNotificationService(QObject *parent = 0);
+
 signals:
     void notificationClicked(Notification notification);
     void notificationReplied(Notification notification, QString reply);
