@@ -16,7 +16,6 @@
  */
 
 #include "TrayNotificationService.h"
-#include "util/Constants.h"
 
 TrayNotificationService::TrayNotificationService(QObject *parent)
     : NotificationService(parent)

@@ -27,7 +27,6 @@
 #include "ui_mainwindow.h"
 #include "dialog/AboutDialog.h"
 #include "dialog/PreferencesDialog.h"
-#include "util/Constants.h"
 
 JSNotifcationWrapper::JSNotifcationWrapper(NotificationService *service, QObject *parent)
     : QObject(parent),
@@ -78,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 #ifndef Q_OS_OSX
-    setWindowIcon(appIcon);
+    setWindowIcon(QIcon(":/artwork/icon/icon256.png"));
 #endif
 
     initNotificationService();
