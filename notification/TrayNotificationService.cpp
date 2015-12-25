@@ -15,24 +15,24 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NULLNOTIFICATIONSERVICE_H
-#define NULLNOTIFICATIONSERVICE_H
+#include "TrayNotificationService.h"
 
-#include "notificationservice.h"
-
-class NullNotificationService : public NotificationService
+TrayNotificationService::TrayNotificationService(QObject *parent)
+    : NotificationService(parent)
 {
-    Q_OBJECT
 
-friend class NotificationService;
+}
 
-public:
-    void setApplicationBadge(QString badge);
-    void deliverNotification(const Notification &notification);
-    void dismissNotifications();
+void TrayNotificationService::dismissNotifications()
+{
+}
 
-private:
-    NullNotificationService(QObject *parent = 0);
-};
+void TrayNotificationService::deliverNotification(const Notification &notification)
+{
+    trayIcon.showMessage(notification.getTitle(), notification.getInformativeText(), QSystemTrayIcon::Information, 3000);
+}
 
-#endif // NULLNOTIFICATIONSERVICE_H
+void TrayNotificationService::setApplicationBadge(QString badge)
+{
+    Q_UNUSED(badge);
+}

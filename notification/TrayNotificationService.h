@@ -15,13 +15,15 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NULLNOTIFICATIONSERVICE_H
-#define NULLNOTIFICATIONSERVICE_H
+#ifndef WHATSQT_TRAYNOTIFICATIONSERVICE_H
+#define WHATSQT_TRAYNOTIFICATIONSERVICE_H
+
+#include <QSystemTrayIcon>
 
 #include "notificationservice.h"
 
-class NullNotificationService : public NotificationService
-{
+class TrayNotificationService: public NotificationService {
+
     Q_OBJECT
 
 friend class NotificationService;
@@ -32,7 +34,10 @@ public:
     void dismissNotifications();
 
 private:
-    NullNotificationService(QObject *parent = 0);
+    TrayNotificationService(QObject *parent = 0);
+
+    QSystemTrayIcon trayIcon;
 };
 
-#endif // NULLNOTIFICATIONSERVICE_H
+
+#endif //WHATSQT_TRAYNOTIFICATIONSERVICE_H

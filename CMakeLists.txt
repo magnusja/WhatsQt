@@ -24,7 +24,7 @@ set(SOURCE_FILES
         dialog/PreferencesDialog.cpp
         main.cpp
         mainwindow.cpp
-        resources.qrc util/Preferences.cpp util/Preferences.h)
+        resources.qrc util/Preferences.cpp util/Preferences.h notification/TrayNotificationService.cpp notification/TrayNotificationService.h)
 
 if(APPLE)
     include(cmake/osx.cmake)
