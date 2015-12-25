@@ -7,6 +7,9 @@ sudo: required
 dist: trusty
 install: travis/install.sh
 script: travis/compile.sh
+before_deploy:
+- echo "Deploy directory structure"
+- ls -al
 deploy:
   - provider: bintray
     skip_cleanup: true
