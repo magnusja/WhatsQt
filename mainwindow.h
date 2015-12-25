@@ -35,6 +35,7 @@ class JSNotifcationWrapper : public QObject {
 public:
     JSNotifcationWrapper(NotificationService *service, QObject *parent = 0);
 
+    void setNotificationService(NotificationService *notificationService);
     Q_INVOKABLE void deliverNotification(const QString &title, const QMap<QString, QVariant> &options);
 
 private:
@@ -65,12 +66,15 @@ protected:
 private:
     Ui::MainWindow *ui;
     NotificationService *notificationService;
+    JSNotifcationWrapper *notificationWrapper;
 
     void saveSettings();
     void readSettings();
 
     void initActions();
     void initMenus();
+
+    void initNotificationService();
 
 #ifdef Q_OS_OSX
     void nativeSetup();

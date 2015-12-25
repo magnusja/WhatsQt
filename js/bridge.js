@@ -62,8 +62,8 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         callback("granted");
     };
 
-    setInterval(function() {
-        this.Notification("Title", {tag: "tag", body: "Body"})
-    }, 3000);
+    //setInterval(function() {
+    //    this.Notification("Title", {tag: "tag", body: "Body"})
+    //}, 3000);
 
 })

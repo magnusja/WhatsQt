@@ -36,6 +36,10 @@ JSNotifcationWrapper::JSNotifcationWrapper(NotificationService *service, QObject
     connect(notificationService, &NotificationService::notificationReplied, this, &JSNotifcationWrapper::onNotificationReplied);
 }
 
+void JSNotifcationWrapper::setNotificationService(NotificationService *notificationService) {
+    this->notificationService = notificationService;
+}
+
 void JSNotifcationWrapper::deliverNotification(const QString &title, const QMap<QString, QVariant> &options)
 {
     qDebug() << "Received notification: " << title << " " << options;
@@ -66,7 +70,9 @@ void JSNotifcationWrapper::onNotificationReplied(const Notification &notificatio
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    notificationService(nullptr),
+    notificationWrapper(nullptr)
 {
     ui->setupUi(this);
 
@@ -74,13 +80,11 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowIcon(QIcon(":/artwork/icon/icon256.png"));
 #endif
 
-    notificationService = NotificationService::getNotificationService(this);
-    connect(notificationService, &NotificationService::notificationClicked, this, &MainWindow::notificationClicked);
-    connect(notificationService, &NotificationService::notificationReplied, this, &MainWindow::notificationReplied);
+    initNotificationService();
 
-    JSNotifcationWrapper *wrapper = new JSNotifcationWrapper(notificationService, this);
+    notificationWrapper = new JSNotifcationWrapper(notificationService, this);
     auto channel = new QWebChannel(this);
-    channel->registerObject("notificationService", wrapper);
+    channel->registerObject("notificationService", notificationWrapper);
     ui->webView->page()->setWebChannel(channel);
 
     connect(ui->webView, &WebView::titleChanged, this, &MainWindow::webViewTitleChanged);
@@ -93,6 +97,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->webView->load(QUrl("https://web.whatsapp.com"));
 
     nativeSetup();
+}
+
+void MainWindow::initNotificationService() {
+    if(notificationService) notificationService->deleteLater();
+
+    notificationService = NotificationService::getNotificationService(this);
+    connect(notificationService, &NotificationService::notificationClicked, this, &MainWindow::notificationClicked);
+    connect(notificationService, &NotificationService::notificationReplied, this, &MainWindow::notificationReplied);
+
+    if(notificationWrapper) notificationWrapper->setNotificationService(notificationService);
 }
 
 MainWindow::~MainWindow()
@@ -192,7 +206,8 @@ void MainWindow::initMenus()
 
     connect(preferencesAction, &QAction::triggered, this, [this]() {
         PreferencesDialog dialog(this);
-        dialog.exec();
+        if(dialog.exec() == QDialog::Accepted)
+            initNotificationService();
     });
 
     QMenu *aboutMenu = menuBar()->addMenu(tr("Help"));
