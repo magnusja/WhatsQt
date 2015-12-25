@@ -90,6 +90,8 @@ NotificationService* NotificationService::getNotificationService(QObject *parent
             return new NullNotificationService(parent);
     }
 
+    // This should not happen
+    return new NullNotificationService(parent);
 }
 
 NotificationService *NotificationService::getNativeNotificationService(QObject *parent)
