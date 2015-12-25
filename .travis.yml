@@ -8,6 +8,7 @@ dist: trusty
 install: travis/install.sh
 script: travis/compile.sh
 deploy:
+  skip_cleanup: true
   provider: bintray
   file: build/bintray.json
   user: mjdev
