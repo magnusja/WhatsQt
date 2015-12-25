@@ -25,8 +25,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qDebug() << preferences.getNotificationType();
     ui->notificationButtonGroup->buttons()[preferences.getNotificationType()]->setChecked(true);
+
+    ui->locationCheckBox->setChecked(preferences.isPermissionGranted(QWebEnginePage::Geolocation));
+    ui->cameraCheckBox->setChecked(preferences.isPermissionGranted(QWebEnginePage::MediaVideoCapture));
+    ui->micCheckBox->setChecked(preferences.isPermissionGranted(QWebEnginePage::MediaAudioCapture));
 
     connect(this, &QDialog::accepted, this, [this]() {
         qDebug() << "saving preferences";
@@ -34,6 +37,10 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
         // see http://doc.qt.io/qt-4.8/qbuttongroup.html#addButton
         int type = qAbs(ui->notificationButtonGroup->checkedId()) - 2;
         preferences.setNotificationType((NotificationType) type);
+
+        preferences.setPermission(QWebEnginePage::Geolocation, ui->locationCheckBox->isChecked());
+        preferences.setPermission(QWebEnginePage::MediaVideoCapture, ui->cameraCheckBox->isChecked());
+        preferences.setPermission(QWebEnginePage::MediaAudioCapture, ui->micCheckBox->isChecked());
     });
 }
 
