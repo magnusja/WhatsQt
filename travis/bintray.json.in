@@ -21,9 +21,9 @@
     "gpgSign": false
   },
   "files": [
-    { "includePattern": "build/WhatsQt.deb", "uploadPattern": "WhatsQt.@PROJECT_VERSION@-@GIT_COMMIT_ID@.deb" },
-    { "includePattern": "build/WhatsQt.rpm", "uploadPattern": "WhatsQt.@PROJECT_VERSION@-@GIT_COMMIT_ID@.rpm" },
-    { "includePattern": "build/WhatsQt.dmg", "uploadPattern": "WhatsQt.@PROJECT_VERSION@-@GIT_COMMIT_ID@.dmg" }
+    { "includePattern": "build/WhatsQt.deb", "uploadPattern": "WhatsQt-@PROJECT_VERSION@-@GIT_COMMIT_ID@.deb" },
+    { "includePattern": "build/WhatsQt.rpm", "uploadPattern": "WhatsQt-@PROJECT_VERSION@-@GIT_COMMIT_ID@.rpm" },
+    { "includePattern": "build/WhatsQt.dmg", "uploadPattern": "WhatsQt-@PROJECT_VERSION@-@GIT_COMMIT_ID@.dmg" }
   ],
   "publish": true
 }
