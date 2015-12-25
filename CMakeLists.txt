@@ -24,7 +24,7 @@ set(SOURCE_FILES
         dialog/AboutDialog.cpp
         dialog/PreferencesDialog.cpp
         util/Preferences.cpp
-        util/Constants.cpp
+        #util/Constants.cpp
         main.cpp
         mainwindow.cpp
         resources.qrc

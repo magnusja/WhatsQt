@@ -17,4 +17,4 @@
 
 #include "Constants.h"
 
-QIcon appIcon(QIcon(":/artwork/icon/icon256.png"));
+QIcon appIcon(":/artwork/icon/icon256.png");

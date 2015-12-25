@@ -21,7 +21,7 @@
 TrayNotificationService::TrayNotificationService(QObject *parent)
     : NotificationService(parent)
 {
-    trayIcon.setIcon(appIcon);
+    trayIcon.setIcon(QIcon(":/artwork/icon/icon256.png"));
     trayIcon.hide();
 }
 
