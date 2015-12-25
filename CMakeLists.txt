@@ -21,6 +21,7 @@ set(SOURCE_FILES
     view/webpage.cpp
     view/webview.cpp
     dialog/AboutDialog.cpp
+    dialog/PreferencesDialog.cpp
     main.cpp
     mainwindow.cpp
     resources.qrc)

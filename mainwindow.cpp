@@ -26,6 +26,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "dialog/AboutDialog.h"
+#include "dialog/PreferencesDialog.h"
 
 JSNotifcationWrapper::JSNotifcationWrapper(NotificationService *service, QObject *parent)
     : QObject(parent),
@@ -190,7 +191,7 @@ void MainWindow::initMenus()
     preferencesAction->setShortcut(QKeySequence("Ctrl+,"));
 
     connect(preferencesAction, &QAction::triggered, this, [this]() {
-        AboutDialog dialog(this);
+        PreferencesDialog dialog(this);
         dialog.exec();
     });
 
