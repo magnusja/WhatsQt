@@ -19,5 +19,5 @@ cmake ../ $prefix
 if [[ $TRAVIS_OS_NAME == "osx" ]]; then
     make package -j2
 else
-    make -j2
+    make package -j2
 fi
