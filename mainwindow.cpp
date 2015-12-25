@@ -183,12 +183,22 @@ void MainWindow::initMenus()
         dialog.exec();
     });
 
-    QAction *aboutQt = new QAction(tr("About Qt"), this);
-    connect(aboutQt, &QAction::triggered, qApp, QApplication::aboutQt);
+    QAction *aboutQtAction = new QAction(tr("About Qt"), this);
+    connect(aboutQtAction, &QAction::triggered, qApp, QApplication::aboutQt);
+
+    QAction *preferencesAction = new QAction(tr("Preferences"), this);
+    preferencesAction->setShortcut(QKeySequence("Ctrl+,"));
+
+    connect(preferencesAction, &QAction::triggered, this, [this]() {
+        AboutDialog dialog(this);
+        dialog.exec();
+    });
 
     QMenu *aboutMenu = menuBar()->addMenu(tr("Help"));
     aboutMenu->addAction(aboutAction);
-    aboutMenu->addAction(aboutQt);
+    aboutMenu->addAction(aboutQtAction);
+    aboutMenu->addSeparator();
+    aboutMenu->addAction(preferencesAction);
 }
 
 bool MainWindow::event(QEvent *event)

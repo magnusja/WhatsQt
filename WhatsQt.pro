@@ -33,17 +33,21 @@ SOURCES += main.cpp\
     notification/notificationservice.cpp \
     notification/nullnotificationservice.cpp \
     view/webpage.cpp \
-    dialog/AboutDialog.cpp
+    dialog/AboutDialog.cpp \
+    dialog/PreferencesDialog.cpp
 
 HEADERS  += mainwindow.h \
     view/webview.h \
     notification/notificationservice.h \
     notification/nullnotificationservice.h \
     view/webpage.h \
-    dialog/AboutDialog.h
+    dialog/AboutDialog.h \
+    dialog/PreferencesDialog.h
 
 FORMS    += mainwindow.ui \
-    dialog/aboutdialog.ui
+    dialog/aboutdialog.ui \
+    dialog/preferencesdialog.ui \
+    dialog/PreferencesDialog.ui
 
 mac {
     HEADERS += notification/osx/osxnotificationservice.h \
