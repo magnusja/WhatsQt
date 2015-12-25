@@ -20,7 +20,7 @@
 #define WHATSQT_PREFERENCES_H
 
 #include <QWebEnginePage>
-#include <QList>
+#include <QMap>
 #include <QSettings>
 
 enum NotificationType {
@@ -36,7 +36,7 @@ public:
 
     void setPermission(QWebEnginePage::Feature feature, bool granted);
     bool isPermissionGranted(QWebEnginePage::Feature feature);
-    QList<QWebEnginePage::Feature> getGrantedPermissions();
+    bool isPermissionDenied(QWebEnginePage::Feature feature);
 
 private:
     QSettings settings;

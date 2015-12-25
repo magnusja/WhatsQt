@@ -51,7 +51,6 @@ WebView::WebView(QWidget *parent)
     setPage(page);
 
     connect(page, &QWebEnginePage::featurePermissionRequested, this, &WebView::onFeaturePermissionRequest);
-
 }
 
 void WebView::contextMenuEvent(QContextMenuEvent *event)
@@ -91,6 +90,19 @@ void WebView::downloadRequested(QWebEngineDownloadItem *download)
 
 void WebView::onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEnginePage::Feature feature)
 {
+
+    if(preferences.isPermissionGranted(feature))
+    {
+        page()->setFeaturePermission(securityOrigin, feature, QWebEnginePage::PermissionGrantedByUser);
+        return;
+    }
+
+    if(preferences.isPermissionDenied(feature))
+    {
+        page()->setFeaturePermission(securityOrigin, feature, QWebEnginePage::PermissionDeniedByUser);
+        return;
+    }
+
     auto permissionString = [](QWebEnginePage::Feature feature) {
         switch(feature)
         {
@@ -109,13 +121,6 @@ void WebView::onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEngineP
 
     qDebug() << Q_FUNC_INFO;
     qDebug() << securityOrigin << " " << feature;
-
-    QSettings settings;
-    if(settings.value(QString("permission_granted_%1").arg(feature), false).toBool())
-    {
-        page()->setFeaturePermission(securityOrigin, feature, QWebEnginePage::PermissionGrantedByUser);
-        return;
-    }
 
     QMessageBox *box = new QMessageBox(QMessageBox::Question,
                                        tr("Permission Request"),
@@ -142,7 +147,7 @@ void WebView::onFeaturePermissionRequest(const QUrl &securityOrigin, QWebEngineP
 
     if(checkBox->isChecked())
     {
-        settings.setValue(QString("permission_granted_%1").arg(feature), accepted);
+        preferences.setPermission(feature, accepted);
     }
 }
 

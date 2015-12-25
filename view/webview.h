@@ -22,6 +22,7 @@
 #include <QWebEngineScriptCollection>
 #include <QWebEngineDownloadItem>
 
+#include "util/Preferences.h"
 
 class WebView : public QWebEngineView
 {
@@ -31,6 +32,8 @@ public:
     void contextMenuEvent(QContextMenuEvent *event);
 
 private:
+    Preferences preferences;
+
     void insertJavaScript(QWebEngineScriptCollection *scripts);
 
 private slots:

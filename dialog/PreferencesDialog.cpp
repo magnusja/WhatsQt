@@ -29,6 +29,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     ui->notificationButtonGroup->buttons()[preferences.getNotificationType()]->setChecked(true);
 
     connect(this, &QDialog::accepted, this, [this]() {
+        qDebug() << "saving preferences";
+
         // see http://doc.qt.io/qt-4.8/qbuttongroup.html#addButton
         int type = qAbs(ui->notificationButtonGroup->checkedId()) - 2;
         preferences.setNotificationType((NotificationType) type);

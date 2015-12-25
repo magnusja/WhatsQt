@@ -31,3 +31,26 @@ NotificationType Preferences::getNotificationType()
     settings.endGroup();
     return type;
 }
+
+void Preferences::setPermission(QWebEnginePage::Feature feature, bool granted)
+{
+    settings.beginGroup("permissions");
+    settings.setValue(QString::number(feature), granted);
+    settings.endGroup();
+}
+
+bool Preferences::isPermissionGranted(QWebEnginePage::Feature feature)
+{
+    settings.beginGroup("permissions");
+    auto granted = settings.value(QString::number(feature), false).toBool();
+    settings.endGroup();
+    return granted;
+}
+
+bool Preferences::isPermissionDenied(QWebEnginePage::Feature feature)
+{
+    settings.beginGroup("permissions");
+    auto denied = !settings.value(QString::number(feature), true).toBool();
+    settings.endGroup();
+    return denied;
+}
