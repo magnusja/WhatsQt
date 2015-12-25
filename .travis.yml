@@ -8,13 +8,18 @@ dist: trusty
 install: travis/install.sh
 script: travis/compile.sh
 deploy:
-  skip_cleanup: true
-  provider: bintray
-  file: build/bintray.json
-  user: mjdev
-  key:
-      secure: BYu28jAo7kZy6YhMwJzsVHLDJWmUhV997/mYHagmBXo0Xz+7W+N6+Cl+mfW8p9uGcKZ+p3a7S7RJDFmYAqoJb6UNZNIGW5B2vL19lA6s5LZdYMJVAzW2RaqFqJc29ygoNn7FC4ueSGY9ncCFCZhr7Xni6RF3QATvdk1OQ81W4T23HGyM96aNk4DyZ155vl5qUTMa5/+hLnA1AuvUD1U1VaBiUZWQdxAZlEJxUyCUjeL0snL1wdWqa9X3ZjpSAxnYhS8OFxZghGm+VG3lESdMKgX+DDpGwafBiblGMoSjQhwhHshSz6MVX9ohN74ZSQA/Z1Aqp3PRF20V7uH/2V5sBSG+qcSm+o3VTYtiIzy9uzcgo1aR/qRGU9E0j6u7G7r37BEQZuGMqd/mgs6I3yiOceueYDtdPkXmYPylofW7MkiZxGZHvS0XLV9gtmMw0CRo/ka6rxgu5+61kGkHCjpkbXW5eQ2Mxj2GOiXltifHoTa7K3H//7/BtQecuNNTpMio6a7kW/Zzz/EKwkubGvXlZHBpdOT3Jcd/eLNlFjQ99t7BZFw7VWQ+N10M0xkqgfqtOw3qMTTzk31FhDS6rho2K5L96DuFQ3PZcwzeMtN4xOHkLlKd/F7I6gUhU/Hrsa08ZHnITCR2E8CkZD6GIb1SPxMOFykg3yup/T80zVcNHFU=
-  on:
-    branch:
-    - develop
-    - master
+  - provider: bintray
+      file: build/bintray.json
+      user: mjdev
+      key:
+        secure: BYu28jAo7kZy6YhMwJzsVHLDJWmUhV997/mYHagmBXo0Xz+7W+N6+Cl+mfW8p9uGcKZ+p3a7S7RJDFmYAqoJb6UNZNIGW5B2vL19lA6s5LZdYMJVAzW2RaqFqJc29ygoNn7FC4ueSGY9ncCFCZhr7Xni6RF3QATvdk1OQ81W4T23HGyM96aNk4DyZ155vl5qUTMa5/+hLnA1AuvUD1U1VaBiUZWQdxAZlEJxUyCUjeL0snL1wdWqa9X3ZjpSAxnYhS8OFxZghGm+VG3lESdMKgX+DDpGwafBiblGMoSjQhwhHshSz6MVX9ohN74ZSQA/Z1Aqp3PRF20V7uH/2V5sBSG+qcSm+o3VTYtiIzy9uzcgo1aR/qRGU9E0j6u7G7r37BEQZuGMqd/mgs6I3yiOceueYDtdPkXmYPylofW7MkiZxGZHvS0XLV9gtmMw0CRo/ka6rxgu5+61kGkHCjpkbXW5eQ2Mxj2GOiXltifHoTa7K3H//7/BtQecuNNTpMio6a7kW/Zzz/EKwkubGvXlZHBpdOT3Jcd/eLNlFjQ99t7BZFw7VWQ+N10M0xkqgfqtOw3qMTTzk31FhDS6rho2K5L96DuFQ3PZcwzeMtN4xOHkLlKd/F7I6gUhU/Hrsa08ZHnITCR2E8CkZD6GIb1SPxMOFykg3yup/T80zVcNHFU=
+      on:
+        branch:
+        - develop
+        - master
+  - provider: releases
+    api_key:
+      secure: Opk3qabllErTTf7VkPIEjoJCpzBUH9h5yDtOCJgaHYkYsEA4cva7PLciYPtuMdWqkapRWmeuZhIC6dbWaapYfIUdiPk9hwxNwqJHloOPGqeJmTxt8hjgcbAN4wjH30EPsDt0euo6T/Nv5q2dytmjmn8nc2NFNB3L4y3jeYa0NWo82ZekpUuw2LP6VkvV5eodQinU0GbziLPJjNYIMZwoogEMa4AJZI/4EWrGKbEA+WJYG5Hv1aVGobnzSCzFimPpbtLVq3vHsgUd2Bu1phEoBXLzcLRhXvpWJ7n5R2y4htKlP+wjGpcKeGtJTh13UYUa1YxNseSmoXOJEFDSiUZUiQMElDKgfGAMTPm3FrwtYkcFaAcsZl0039n+eaJvVKF1TzeeOgzTyW3zjqOVmeDzBfNIPYmbhrmeiqId7dtEUQFCMMYK+jLzodbUNKktmANkWVtwWyhVXp3GvkEdcfA6L9tMrYPl+pJCamFQfZXWA/DSItsN87nDkqqYVE8VXNfH8P/8Ji/DgQg39qrZt2fLwsG1wi33JucpAHPdmMpCSA8aMS4zhel1rRqjn7cHX7OQTUfosL851kwTqlpnylZc1EXaSnsL2fscUHH96Uml4E9BWGf3pqs9aMZYk9VIvJxeFo3JQitgQNRMlga1QgIXSy6g9PAEmw+178Mc1fTTCSM=
+    file: build/WhatsQt.dmg
+    on:
+      tags: true
