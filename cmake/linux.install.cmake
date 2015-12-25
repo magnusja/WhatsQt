@@ -1,5 +1,5 @@
 
-install(TARGETS WhatsQt DESTINATION usr/bin)
+install(TARGETS WhatsQt DESTINATION bin)
 
 # TODO desktop file and icon
 
