@@ -1,0 +1,6 @@
+language: cpp
+os:
+  #- linux
+  - osx
+install: travis/install.sh
+cache: apt
