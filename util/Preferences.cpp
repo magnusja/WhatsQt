@@ -15,30 +15,19 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "Preferences.h"
 
-#ifndef PREFERENCESDIALOG_H
-#define PREFERENCESDIALOG_H
-
-#include <QDialog>
-
-#include "util/Preferences.h"
-
-namespace Ui {
-class PreferencesDialog;
+void Preferences::setNotificationType(NotificationType type)
+{
+    settings.beginGroup("general");
+    settings.setValue("notification_type", type);
+    settings.endGroup();
 }
 
-class PreferencesDialog : public QDialog
+NotificationType Preferences::getNotificationType()
 {
-    Q_OBJECT
-
-public:
-    explicit PreferencesDialog(QWidget *parent = 0);
-    ~PreferencesDialog();
-
-private:
-    Ui::PreferencesDialog *ui;
-
-    Preferences preferences;
-};
-
-#endif // PREFERENCESDIALOG_H
+    settings.beginGroup("general");
+    auto type = (NotificationType) settings.value("notification_type", 0).toInt();
+    settings.endGroup();
+    return type;
+}

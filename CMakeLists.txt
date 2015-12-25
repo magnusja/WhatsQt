@@ -16,15 +16,15 @@ endif()
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION}")
 
 set(SOURCE_FILES
-    notification/notificationservice.cpp
-    notification/nullnotificationservice.cpp
-    view/webpage.cpp
-    view/webview.cpp
-    dialog/AboutDialog.cpp
-    dialog/PreferencesDialog.cpp
-    main.cpp
-    mainwindow.cpp
-    resources.qrc)
+        notification/notificationservice.cpp
+        notification/nullnotificationservice.cpp
+        view/webpage.cpp
+        view/webview.cpp
+        dialog/AboutDialog.cpp
+        dialog/PreferencesDialog.cpp
+        main.cpp
+        mainwindow.cpp
+        resources.qrc util/Preferences.cpp util/Preferences.h)
 
 if(APPLE)
     include(cmake/osx.cmake)

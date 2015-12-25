@@ -16,29 +16,31 @@
  */
 
 
-#ifndef PREFERENCESDIALOG_H
-#define PREFERENCESDIALOG_H
+#ifndef WHATSQT_PREFERENCES_H
+#define WHATSQT_PREFERENCES_H
 
-#include <QDialog>
+#include <QWebEnginePage>
+#include <QList>
+#include <QSettings>
 
-#include "util/Preferences.h"
-
-namespace Ui {
-class PreferencesDialog;
-}
-
-class PreferencesDialog : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit PreferencesDialog(QWidget *parent = 0);
-    ~PreferencesDialog();
-
-private:
-    Ui::PreferencesDialog *ui;
-
-    Preferences preferences;
+enum NotificationType {
+    Native = 0,
+    SystemTray,
+    Null
 };
 
-#endif // PREFERENCESDIALOG_H
+class Preferences {
+public:
+    void setNotificationType(NotificationType type);
+    NotificationType getNotificationType();
+
+    void setPermission(QWebEnginePage::Feature feature, bool granted);
+    bool isPermissionGranted(QWebEnginePage::Feature feature);
+    QList<QWebEnginePage::Feature> getGrantedPermissions();
+
+private:
+    QSettings settings;
+};
+
+
+#endif //WHATSQT_PREFERENCES_H
