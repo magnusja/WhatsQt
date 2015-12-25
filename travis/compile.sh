@@ -2,6 +2,7 @@
 
 prefix=""
 if [[ $TRAVIS_OS_NAME == "osx" ]]; then
+  export PATH=$PATH:$(echo /usr/local/Cellar/qt5/5.*/)/bin
   prefix="-DCMAKE_PREFIX_PATH=$(echo /usr/local/Cellar/qt5/5.*/)"
 fi
 
