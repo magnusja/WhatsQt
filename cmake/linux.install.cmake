@@ -1,2 +1,2 @@
-set(CPACK_GENERATOR "CPackDeb")
+set(CPACK_GENERATOR "DEB")
 # TODO: add depends
