@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $TRAVIS_OS_NAME == "osx" ]] ; then
-  brew update
+  brew update > /dev/null
   brew install qt5
 else
 

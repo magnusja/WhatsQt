@@ -3,4 +3,5 @@ os:
   #- linux
   - osx
 install: travis/install.sh
+script: travis/compile.sh
 cache: apt
