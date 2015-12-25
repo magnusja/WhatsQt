@@ -7,3 +7,7 @@ WhatQt is bringing WhatsApp Web natively to OS X, Linux and Windows. WhatsQt int
 ### How does it work?
 
 WhatsQt is written in C++ and uses the Qt GUI framework, which also offers a module called QtWebEngine. The QtWebEngine is used to render WhatsApp Web and execute the JavaScript code.
+
+#### Build status (Linux & OS X)
+
+develop: [![Build Status](https://travis-ci.org/mjdev/WhatsQt.svg?branch=develop)](https://travis-ci.org/mjdev/WhatsQt)
