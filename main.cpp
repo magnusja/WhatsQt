@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     QApplication::setApplicationName("WhatsQt");
     QApplication::setOrganizationName("mjdv");
     QApplication::setOrganizationDomain("https://github.com/mjdev");
+    QApplication::setApplicationVersion(APP_VERSION);
 
     QApplication a(argc, argv);
     MainWindow w;

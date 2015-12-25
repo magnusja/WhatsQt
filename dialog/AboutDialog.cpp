@@ -6,6 +6,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
         ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
+
+    setFixedSize(size());
+    connect(ui->okButton, &QPushButton::clicked, this, &QDialog::accept);
+
+    ui->infoLabel->setText(ui->infoLabel->text().arg(APP_VERSION));
 }
 
 AboutDialog::~AboutDialog()

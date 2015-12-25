@@ -13,6 +13,8 @@ else()
     add_definitions("-Wall")
 endif()
 
+add_definitions(-DAPP_VERSION="${PROJECT_VERSION}")
+
 set(SOURCE_FILES
     notification/notificationservice.cpp
     notification/nullnotificationservice.cpp
