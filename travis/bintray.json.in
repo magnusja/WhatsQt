@@ -15,7 +15,7 @@
     "public_stats": true
   },
   "version": {
-    "name": "@PROJECT_VERSION@"-"@GIT_COMMIT_ID@",
+    "name": "@PROJECT_VERSION@-@GIT_COMMIT_ID@",
     "desc": "Unstable builds",
     "vcs_tag": "@GIT_COMMIT_ID@",
     "gpgSign": false
