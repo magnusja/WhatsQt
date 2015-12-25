@@ -50,7 +50,7 @@ elseif(UNIX)
 endif()
 
 set(CPACK_PACKAGE_NAME WhatsQt)
-set(CPACK_PACKAGE_VERSION ${VERSION})
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "WhatQt is bringing WhatsApp Web natively to OS X, Linux and Windows.")
 set(CPACK_PACKAGE_CONTACT mjahnen)
 
