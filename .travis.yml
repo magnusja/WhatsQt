@@ -8,8 +8,8 @@ dist: trusty
 install: travis/install.sh
 script: travis/compile.sh
 deploy:
-  skip_cleanup: true
   - provider: bintray
+    skip_cleanup: true
     file: build/bintray.json
     user: mjdev
     key:
@@ -19,6 +19,7 @@ deploy:
       - develop
       - master
   - provider: releases
+    skip_cleanup: true
     api_key:
       secure: Opk3qabllErTTf7VkPIEjoJCpzBUH9h5yDtOCJgaHYkYsEA4cva7PLciYPtuMdWqkapRWmeuZhIC6dbWaapYfIUdiPk9hwxNwqJHloOPGqeJmTxt8hjgcbAN4wjH30EPsDt0euo6T/Nv5q2dytmjmn8nc2NFNB3L4y3jeYa0NWo82ZekpUuw2LP6VkvV5eodQinU0GbziLPJjNYIMZwoogEMa4AJZI/4EWrGKbEA+WJYG5Hv1aVGobnzSCzFimPpbtLVq3vHsgUd2Bu1phEoBXLzcLRhXvpWJ7n5R2y4htKlP+wjGpcKeGtJTh13UYUa1YxNseSmoXOJEFDSiUZUiQMElDKgfGAMTPm3FrwtYkcFaAcsZl0039n+eaJvVKF1TzeeOgzTyW3zjqOVmeDzBfNIPYmbhrmeiqId7dtEUQFCMMYK+jLzodbUNKktmANkWVtwWyhVXp3GvkEdcfA6L9tMrYPl+pJCamFQfZXWA/DSItsN87nDkqqYVE8VXNfH8P/8Ji/DgQg39qrZt2fLwsG1wi33JucpAHPdmMpCSA8aMS4zhel1rRqjn7cHX7OQTUfosL851kwTqlpnylZc1EXaSnsL2fscUHH96Uml4E9BWGf3pqs9aMZYk9VIvJxeFo3JQitgQNRMlga1QgIXSy6g9PAEmw+178Mc1fTTCSM=
     file: build/WhatsQt.dmg
