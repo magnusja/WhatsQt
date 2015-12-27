@@ -46,7 +46,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     dialog/aboutdialog.ui \
-    dialog/preferencesdialog.ui \
     dialog/PreferencesDialog.ui
 
 mac {

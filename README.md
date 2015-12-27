@@ -1,6 +1,6 @@
 # WhatsQt
 
-WhatsQt is bringing WhatsApp Web natively to OS X, Linux and Windows. WhatsQt integrates seemlessly into your existing environment. You do not have to search the WhatsApp Web browser tab anymore, WhatsQt is a standalone application.
+WhatsQt is bringing WhatsApp Web natively to OS X, Linux and Windows. WhatsQt integrates seamlessly into your existing environment. You do not have to search the WhatsApp Web browser tab anymore, WhatsQt is a standalone application.
 
 **Please note:** This project is not related in any way to WhatsApp, it is just a private hobby!
 
