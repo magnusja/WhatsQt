@@ -12,7 +12,7 @@ CONFIG += c++11
 
 TARGET = WhatsQt
 TEMPLATE = app
-VERSION = 0.01
+VERSION = 0.2.1
 
 CONFIG(debug, debug|release) {
     DESTDIR = bin/debug
@@ -30,19 +30,23 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 SOURCES += main.cpp\
     mainwindow.cpp \
     view/webview.cpp \
+    view/webpage.cpp \
     notification/notificationservice.cpp \
     notification/nullnotificationservice.cpp \
-    view/webpage.cpp \
+    notification/TrayNotificationService.cpp \
     dialog/AboutDialog.cpp \
-    dialog/PreferencesDialog.cpp
+    dialog/PreferencesDialog.cpp \
+    util/Preferences.cpp
 
 HEADERS  += mainwindow.h \
     view/webview.h \
     notification/notificationservice.h \
     notification/nullnotificationservice.h \
+    notification/TrayNotificationService.h \
     view/webpage.h \
     dialog/AboutDialog.h \
-    dialog/PreferencesDialog.h
+    dialog/PreferencesDialog.h \
+    util/Preferences.h
 
 FORMS    += mainwindow.ui \
     dialog/aboutdialog.ui \
@@ -54,9 +58,21 @@ mac {
 
     OBJECTIVE_SOURCES += notification/osx/osxnotificationservice.mm \
         notification/osx/notificationcenterdelegate.mm \
-        mainwindow_osx.cpp
+        mainwindow_osx.mm
+
+    ICON = ./artwork/icon/icon.icns
 
     LIBS += -framework Foundation -framework AppKit
+}
+
+unix:!mac {
+    QT += dbus
+
+    SOURCES += notification/linux/FreedesktopNotificationService.cpp
+
+    HEADERS += notification/linux/FreedesktopNotificationService.h
+
+    DBUS_INTERFACES =  notification/linux/org.freedesktop.Notifications.xml
 }
 
 RESOURCES += \
