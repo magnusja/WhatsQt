@@ -71,6 +71,7 @@ set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME})
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "WhatsQt is bringing WhatsApp Web natively to OS X, Linux and Windows.")
 set(CPACK_PACKAGE_CONTACT mjahnen)
+set(CPACK_PACKAGE_VENDOR mjahnen)
 
 include(cmake/gitcommitid.cmake)
 
