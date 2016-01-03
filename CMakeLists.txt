@@ -12,12 +12,12 @@ else()
     add_definitions("-Wall")
 endif()
 
-#if(CMAKE_CONFIGURATION_TYPES)
-#   set(CMAKE_CONFIGURATION_TYPES Debug Release)
-#   set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
-#       "Reset the configurations to what we need"
-#       FORCE)
-#endif()
+if(CMAKE_CONFIGURATION_TYPES)
+   set(CMAKE_CONFIGURATION_TYPES Debug Release)
+   set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
+       "Reset the configurations to what we need"
+       FORCE)
+endif()
 
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION}")
 
@@ -39,7 +39,7 @@ if(APPLE)
     include(cmake/osx.cmake)
 elseif(UNIX)
     include(cmake/linux.cmake)
-elseif(WINDOWS)
+elseif(WIN32)
     include(cmake/windows.cmake)
 endif()
 
