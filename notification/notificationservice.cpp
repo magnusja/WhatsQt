@@ -100,6 +100,8 @@ NotificationService *NotificationService::getNativeNotificationService(QObject *
     return new OSXNotificationService(parent);
 #elif defined(Q_OS_LINUX)
     return new FreedesktopNotificationService(parent);
+#elif defined(Q_OS_WIN)
+    return new TrayNotificationService(parent);
 #else
     return new NullNotificationService(parent);
 #endif
