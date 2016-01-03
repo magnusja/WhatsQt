@@ -22,4 +22,4 @@ set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
     # Delete the Desktop link at uninstallation.
     Delete '$DESKTOP\\\\${PROJECT_NAME}.lnk' ")
 
-set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "ExecWait '\\\"$INSTDIR\\\\bin\\\\vcredist_x86.exe\\\" /passive /install /norestart")
+set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "ExecWait '\\\"$INSTDIR\\\\bin\\\\vcredist_x86.exe\\\" /passive /install /norestart'")
