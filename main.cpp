@@ -19,6 +19,10 @@
 
 #include "mainwindow.h"
 
+#ifdef Q_OS_WIN
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#endif
+
 int main(int argc, char *argv[])
 {
 #ifdef QT_DEBUG

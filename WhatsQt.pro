@@ -52,6 +52,8 @@ FORMS    += mainwindow.ui \
     dialog/aboutdialog.ui \
     dialog/PreferencesDialog.ui
 
+RC_FILE += WhatsQt.rc
+
 mac {
     HEADERS += notification/osx/osxnotificationservice.h \
         notification/osx/notificationcenterdelegate.h
