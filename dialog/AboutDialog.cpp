@@ -29,6 +29,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     connect(ui->okButton, &QPushButton::clicked, this, &QDialog::accept);
 
     ui->infoLabel->setText(ui->infoLabel->text().arg(APP_VERSION));
+    ui->infoLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
 }
 
 AboutDialog::~AboutDialog()
