@@ -68,6 +68,7 @@ Makefile*
 *.out
 *.app
 bin/
+build/
 
 
 ### Intellij ###
