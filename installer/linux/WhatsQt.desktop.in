@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=@PROJECT_VERSION@
+Type=Application
+Name=WhatsQt
+Exec=WhatsQt
+Icon=WhatsQt
+Categories=Network;Chat;
