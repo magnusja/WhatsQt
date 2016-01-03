@@ -62,6 +62,8 @@ if(APPLE)
     include(cmake/osx.install.cmake)
 elseif(UNIX)
     include(cmake/linux.install.cmake)
+elseif(WIN32)
+    include(cmake/windows.install.cmake)
 endif()
 
 set(CPACK_PACKAGE_NAME WhatsQt)
