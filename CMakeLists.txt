@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 project(WhatsQt VERSION 0.2.1)
 
 if(MSVC)
-    set(CMAKE_CONFIGURATION_TYPES Debug Release)
-    set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
-        "Reset the configurations to what we need"
-        FORCE)
     if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
         string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     else()
@@ -15,6 +11,13 @@ else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     add_definitions("-Wall")
 endif()
+
+#if(CMAKE_CONFIGURATION_TYPES)
+#   set(CMAKE_CONFIGURATION_TYPES Debug Release)
+#   set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
+#       "Reset the configurations to what we need"
+#       FORCE)
+#endif()
 
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION}")
 
@@ -36,6 +39,8 @@ if(APPLE)
     include(cmake/osx.cmake)
 elseif(UNIX)
     include(cmake/linux.cmake)
+elseif(WINDOWS)
+    include(cmake/windows.cmake)
 endif()
 
 set(CMAKE_AUTOMOC ON)

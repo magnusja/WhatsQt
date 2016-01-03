@@ -5,4 +5,4 @@ set CMAKE_PREFIX_PATH=C:\Programme\Qt\5.5\msvc2013\lib\cmake
 mkdir build
 cd build
 cmake .. -G "Visual Studio 12 2013"
-msbuild ALL_BUILD.vcxproj
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release
