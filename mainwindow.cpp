@@ -44,6 +44,12 @@ void JSNotifcationWrapper::deliverNotification(const QString &title, const QMap<
 {
     qDebug() << "Received notification: " << title << " " << options;
 
+    if(qApp->activeWindow())
+    {
+        qDebug() << "Ignoring notification due to active window";
+        return;
+    }
+
     Notification notification;
     notification.setTitle(title);
     notification.setInformativeText(options["body"].toString());
