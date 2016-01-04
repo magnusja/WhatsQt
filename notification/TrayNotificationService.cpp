@@ -31,7 +31,10 @@ void TrayNotificationService::dismissNotifications()
 void TrayNotificationService::deliverNotification(const Notification &notification)
 {
     trayIcon.show();
-    trayIcon.showMessage(notification.getTitle(), notification.getInformativeText(), QSystemTrayIcon::Information, 3000);
+    trayIcon.showMessage(notification.getTitle(),
+        notification.getInformativeText(),
+        QSystemTrayIcon::Information,
+        preferences.getNotificationTimeMs());
     trayIcon.hide();
 }
 

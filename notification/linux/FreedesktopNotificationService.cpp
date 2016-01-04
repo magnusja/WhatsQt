@@ -60,7 +60,7 @@ void FreedesktopNotificationService::deliverNotification(const Notification &not
     // TODO: passing zero sets new an id for this notification -> how can we identify it 'backwards'
     // to enable action invokes
     freedesktopInterface->Notify(qAppName(), 0, imageFile->fileName(), notification.getTitle(),
-        notification.getInformativeText(), QStringList(), QVariantMap(), 3000);
+        notification.getInformativeText(), QStringList(), QVariantMap(), preferences.getNotificationTimeMs());
 }
 
 void FreedesktopNotificationService::dismissNotifications()

@@ -32,6 +32,12 @@ Preferences::NotificationType Preferences::getNotificationType()
     return type;
 }
 
+uint Preferences::getNotificationTimeMs()
+{
+    // hard coded for now
+    return 7000;
+}
+
 void Preferences::setPermission(QWebEnginePage::Feature feature, bool granted)
 {
     settings.beginGroup("permissions");

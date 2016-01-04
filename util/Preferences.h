@@ -35,6 +35,7 @@ public:
 
     void setNotificationType(NotificationType type);
     NotificationType getNotificationType();
+    uint getNotificationTimeMs();
 
     void setPermission(QWebEnginePage::Feature feature, bool granted);
     bool isPermissionGranted(QWebEnginePage::Feature feature);

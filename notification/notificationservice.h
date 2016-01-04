@@ -19,6 +19,7 @@
 #define NOTIFICATIONSERVICE_H
 
 #include <QObject>
+#include "util/Preferences.h"
 
 class Notification {
 
@@ -54,6 +55,8 @@ public:
 
 protected:
     NotificationService(QObject *parent = 0);
+
+    Preferences preferences;
 
 private:
     static NotificationService *getNativeNotificationService(QObject *parent = 0);
