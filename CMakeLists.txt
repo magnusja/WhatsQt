@@ -59,6 +59,8 @@ target_link_libraries(WhatsQt ${LIBS})
 qt5_use_modules(WhatsQt Widgets WebEngineWidgets WebChannel ${ADDITIONAL_QT_MODULES})
 
 if(APPLE)
+    set_target_properties(WhatsQt PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in)
+
     include(cmake/osx.install.cmake)
 elseif(UNIX)
     include(cmake/linux.install.cmake)
