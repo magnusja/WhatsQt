@@ -59,7 +59,7 @@ void OSXNotificationService::deliverNotification(const Notification &notificatio
     osxNotification.title = title;
     osxNotification.informativeText = informativeText;
     osxNotification.hasReplyButton = true;
-    //osxNotification.identifier = identifier;
+    osxNotification.identifier = identifier;
     [notificationCenter scheduleNotification:osxNotification];
 }
 
