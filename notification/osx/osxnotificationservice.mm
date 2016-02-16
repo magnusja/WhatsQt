@@ -55,6 +55,8 @@ void OSXNotificationService::deliverNotification(const Notification &notificatio
     NSString *informativeText = notification.getInformativeText().toNSString();
     NSString *identifier = notification.getIdentifier().toNSString();
 
+    qDebug() << "deliver notification with identifier: " << identifier;
+
     NSUserNotification *osxNotification = [NSUserNotification new];
     osxNotification.title = title;
     osxNotification.informativeText = informativeText;
