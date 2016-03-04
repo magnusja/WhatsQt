@@ -22,63 +22,59 @@ script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js';
 script.type = 'text/javascript';
 document.documentElement.appendChild(script);
 
-new QWebChannel(qt.webChannelTransport, function(channel) {
-    console.log("QWebChannel successfully established")
+function openChat(tag) {
+    tag = tag.replace('.', '=1');
+    console.log("Open chat with tag: " + tag);
+    var event = new MouseEvent('mousedown', { 'view': window, 'bubbles': true, 'cancelable': true });
 
-    window.notificationService = channel.objects.notificationService
+    document.querySelector('div.chat[data-reactid*="' + tag + '"]').dispatchEvent(event);
+}
+
+new QWebChannel(qt.webChannelTransport, function(channel) {
+    console.log("QWebChannel successfully established");
+
+    window.notificationService = channel.objects.notificationService;
 
     window.notificationService.notificationClicked.connect(function(title, options) {
-        console.log("Notification clicked: " + title + " " + JSON.stringify(options))
-        var span = $("span[title='" + title + "'][dir='auto']")
-        if(span == null) {
-            alert("Span null")
-            return
-        }
-
-        span.click()
-    })
+        console.log("Notification clicked: " + title + " " + JSON.stringify(options));
+        openChat(options.tag);
+    });
 
     window.notificationService.notificationReplied.connect(function(title, options, reply) {
-        console.log("Notification replied: " + title + " " + JSON.stringify(options) + " " + reply)
-        var span = $("span[title='" + title + "'][dir='auto']")
-        if(span == null) {
-            alert("Span null")
-            return
-        }
-
-        span.click()
+        console.log("Notification replied: " + title + " " + JSON.stringify(options) + " " + reply);
+        openChat(options.tag);
 
         // TODO: maybe listen for html change event instead of waiting 250ms
         setTimeout(function() {
-            var input = $("div.input[dir='auto'][contenteditable='true']")
-            if(input == null) {
+            var input = $("div.input[dir='auto'][contenteditable='true']");
+            if(input.length <= 0) {
                 alert("input null");
                 return;
             }
 
-            input.text(reply)
+            input.text(reply);
 
             // trigger input event to force onChange method of react.js to be called
             var event = new Event('input', { bubbles: true });
             input[0].dispatchEvent(event);
 
-            var button = $("button.icon.btn-icon.icon-send.send-container")
+            var button = $("button.icon.btn-icon.icon-send.send-container");
 
-            if(button == null || span == null) {
+            if(button.length <= 0) {
                 alert("button null");
                 return;
             }
 
-            button.click()
+            button.click();
         }, 250)
     })
 
 
     // hook into the notification API, to deliver notifications native
     this.Notification = function(title, options) {
-        console.log("Notification: " + title + " " + JSON.stringify(options))
+        console.log("Notification: " + title + " " + JSON.stringify(options));
 
-        window.notificationService.deliverNotification(title, options)
+        window.notificationService.deliverNotification(title, options);
     };
 
     this.Notification.permission = "granted";
@@ -90,4 +86,4 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
     //    this.Notification("Title", {tag: "tag", body: "Body"})
     //}, 3000);
 
-})
+});
