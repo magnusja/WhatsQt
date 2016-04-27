@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project(WhatsQt VERSION 0.2.3)
+project(WhatsQt VERSION 0.2.4)
 
 if(MSVC)
     if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
