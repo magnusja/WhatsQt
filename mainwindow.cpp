@@ -125,7 +125,7 @@ void MainWindow::webViewTitleChanged(const QString &title)
     qDebug() << "Title changed to: " << title;
 
     QString badge = "";
-    QRegExp regex("\\(([0-9]+)\\) WhatsApp Web");
+    QRegExp regex("\\(([0-9]+)\\) WhatsApp");
 
     if(regex.indexIn(title) > -1) {
         badge = regex.cap(1);
