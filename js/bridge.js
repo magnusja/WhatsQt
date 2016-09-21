@@ -15,19 +15,18 @@
  * along with WhatsQt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-console.log("JavaScript successfully injected")
+console.log("JavaScript successfully injected");
 
 var script = document.createElement('script');
 script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js';
 script.type = 'text/javascript';
 document.documentElement.appendChild(script);
 
-function openChat(tag) {
-    tag = tag.replace('.', '=1');
-    console.log("Open chat with tag: " + tag);
+function openChat(title) {
+    console.log("Open chat with title: " + title);
     var event = new MouseEvent('mousedown', { 'view': window, 'bubbles': true, 'cancelable': true });
 
-    document.querySelector('div.chat[data-reactid*="' + tag + '"]').dispatchEvent(event);
+    document.querySelector('span[title="' + title + '"]').dispatchEvent(event);
 }
 
 new QWebChannel(qt.webChannelTransport, function(channel) {
@@ -37,12 +36,12 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
 
     window.notificationService.notificationClicked.connect(function(title, options) {
         console.log("Notification clicked: " + title + " " + JSON.stringify(options));
-        openChat(options.tag);
+        openChat(title);
     });
 
     window.notificationService.notificationReplied.connect(function(title, options, reply) {
         console.log("Notification replied: " + title + " " + JSON.stringify(options) + " " + reply);
-        openChat(options.tag);
+        openChat(title);
 
         // TODO: maybe listen for html change event instead of waiting 250ms
         setTimeout(function() {
@@ -67,7 +66,7 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
 
             button.click();
         }, 250)
-    })
+    });
 
 
     // hook into the notification API, to deliver notifications native
@@ -83,7 +82,7 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
     };
 
     //setInterval(function() {
-    //    this.Notification("Title", {tag: "tag", body: "Body"})
+    //    this.Notification("title", {tag: "tag", body: "Body"})
     //}, 3000);
 
 });
