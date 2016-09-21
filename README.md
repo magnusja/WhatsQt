@@ -10,4 +10,4 @@ WhatsQt is written in C++ and uses the Qt GUI framework, which also offers a mod
 
 #### Build status (Linux & OS X)
 
-develop: [![Build Status](https://travis-ci.org/mjdev/WhatsQt.svg?branch=develop)](https://travis-ci.org/mjdev/WhatsQt) master: [![Build Status](https://travis-ci.org/mjdev/WhatsQt.svg?branch=master)](https://travis-ci.org/mjdev/WhatsQt)
+develop: [![Build Status](https://travis-ci.org/magnusja/WhatsQt.svg?branch=develop)](https://travis-ci.org/mjdev/WhatsQt) master: [![Build Status](https://travis-ci.org/magnusja/WhatsQt.svg?branch=master)](https://travis-ci.org/mjdev/WhatsQt)
