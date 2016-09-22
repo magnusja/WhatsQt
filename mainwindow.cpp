@@ -50,10 +50,12 @@ void JSNotifcationWrapper::deliverNotification(const QString &title, const QMap<
         return;
     }
 
+    auto body = options["body"].toString();
     Notification notification;
     notification.setTitle(title);
-    notification.setInformativeText(options["body"].toString());
-    notification.setIdentifier(options["tag"].toString());
+    notification.setInformativeText(body);
+    notification.setIdentifier(options["tag"].toString() +
+                                       QString(QCryptographicHash::hash(body.toUtf8(), QCryptographicHash::Md5).toHex()));
 
     notificationService->deliverNotification(notification);
 }
